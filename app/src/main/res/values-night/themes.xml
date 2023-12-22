@@ -2,6 +2,22 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Graduation_project" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
+        <item name="colorPrimary">@color/black_silver</item>
+        <item name="colorSecondary">@color/brown_white</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+    <!-- dark mode-->
+    <!--screen dark-->
+    <style name="SCREEN">
+        <item name="android:background">@drawable/downloaddark</item>
+    </style>
+    <!--text background-->
+    <style name="Text">
+        <item name="android:textColor">@color/brown_white</item>
+    </style>
+    <!--button background-->
+    <style name="Button">
+        <item name="backgroundTint">@color/brown_white</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

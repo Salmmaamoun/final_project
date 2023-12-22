@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Graduation_project</string>
+    <string name="nextbtn">next</string>
+    <string name="skipbtn">skip</string>
 </resources>

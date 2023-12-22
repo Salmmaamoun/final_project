@@ -1,7 +1,8 @@
-package com.example.graduation_project
+package com.example.graduation_project.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.graduation_project.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
