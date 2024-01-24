@@ -13,22 +13,29 @@
         android:theme="@style/Theme.Graduation_project"
         tools:targetApi="31">
         <activity
+            android:name=".ui.signup.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.signup.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
-            android:exported="false">
-
-        </activity>
-        <activity android:name=".ui.splach.SplachScreenActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.splach.SplachScreenActivity"
+            android:exported="false">
+
 
         </activity>
-        <activity android:name=".ui.onboarding.OnBoardingScreenActivity"
-            android:exported="true"
-            >
+        <activity
+            android:name=".ui.onboarding.OnBoardingScreenActivity"
+            android:exported="false" >
 
         </activity>
     </application>

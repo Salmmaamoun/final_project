@@ -2,4 +2,6 @@
     <string name="app_name">Graduation_project</string>
     <string name="nextbtn">next</string>
     <string name="skipbtn">skip</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
