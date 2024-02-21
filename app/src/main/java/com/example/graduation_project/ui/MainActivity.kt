@@ -1,15 +1,15 @@
 package com.example.graduation_project.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import com.example.domain.entity.LoginRequest
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.ActivityMainBinding
 import com.example.graduation_project.ui.bottomnavigationScreens.HomeFragment
-import com.example.graduation_project.ui.bottomnavigationScreens.QuaraanFragment
-import com.example.graduation_project.ui.bottomnavigationScreens.TafseerFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.quran.SoraListFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.Tafseer.TafseerFragment
 import com.example.weather_app.ui.base.BaseActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -18,12 +18,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val req=LoginRequest("ss","sss")
+
         val fragments = listOf(
+            SoraListFragment(),
             HomeFragment(),
-            QuaraanFragment(),
             TafseerFragment()
         )
-        replaceFragment(fragments[0])
+
 
         // Configure the Meow Bottom Navigation
         binding.bottomNavigation.apply {

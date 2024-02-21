@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
+
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:name=".ui.MyApplication"
         android:icon="@mipmap/book"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+
         android:theme="@style/Theme.Graduation_project"
         tools:targetApi="31">
         <activity
             android:name=".ui.signup.SignUpActivity"
-            android:exported="false" />
+            android:exported="true" >
+
+        </activity>
         <activity
-            android:name=".ui.signup.LoginActivity"
-            android:exported="false" />
+            android:name=".ui.Login.LoginActivity"
+            android:exported="false">
+
+
+        </activity>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true" >
@@ -29,14 +37,13 @@
         </activity>
         <activity
             android:name=".ui.splach.SplachScreenActivity"
-            android:exported="false">
+            android:exported="true">
 
 
         </activity>
         <activity
             android:name=".ui.onboarding.OnBoardingScreenActivity"
-            android:exported="false" >
-
+            android:exported="true" >
         </activity>
     </application>
 

@@ -1,22 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/SCREEN"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/grounddark"
-        tools:context=".ui.bottomnavigationScreens.TafseerFragment">
+        tools:context=".ui.bottomnavigationScreens.Tafseer.TafseerFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <Button
+            android:id="@+id/name_sura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_120sdp"
+            android:hint=" Select the name of the surah"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/number_aya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:hint="click here to Select the number of the aya"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_sura" />
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:drawableEnd="@drawable/baseline_search_24"
+            android:text="@string/search_here"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/number_aya" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_button">
 
-    </FrameLayout>
+
+            <TextView
+                android:id="@+id/tafseer_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:text="واذكروا -يا بني إسرائيل- حين أَخَذْنا العهد المؤكَّد منكم بالإيمان بالله وإفراده بالعبادة، ورفعنا جبل الطور فوقكم، وقلنا لكم: خذوا الكتاب الذي أعطيناكم بجدٍ واجتهاد واحفظوه، وإلا أطبقنا عليكم الجبل، ولا تنسوا التوراة قولا وعملا كي تتقوني وتخافوا عقابي."
+                android:scrollbars="vertical"
+                 />
+
+        </ScrollView>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -16,6 +16,7 @@
     <!--text background-->
     <style name="Text">
         <item name="color">@color/black</item>
+        <item name="android:textAlignment">center</item>
     </style>
     <!--button background-->
     <style name="Button">

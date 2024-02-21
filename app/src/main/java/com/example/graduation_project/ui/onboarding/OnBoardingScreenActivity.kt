@@ -9,8 +9,9 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.ActivityOnBoardingScreenBinding
-import com.example.graduation_project.ui.signup.LoginActivity
+import com.example.graduation_project.ui.Login.LoginActivity
 import com.example.graduation_project.ui.MainActivity
+import com.example.graduation_project.ui.signup.SignUpActivity
 import com.example.weather_app.ui.base.BaseActivity
 import com.example.weather_app.ui.base.onBoarding.FirstOnBoardingScreenFragment
 import com.example.weather_app.ui.base.onBoarding.OnBoardingAdapter
@@ -61,7 +62,7 @@ class OnBoardingScreenActivity() : BaseActivity<ActivityOnBoardingScreenBinding>
         // Implement next button
         binding.btnNext.setOnClickListener {
            if (binding.vpOnboarding.currentItem == onboardingScreens.size - 1) {
-            val intent= Intent(it.context, LoginActivity::class.java)
+            val intent= Intent(it.context, SignUpActivity::class.java)
                 startActivity(intent)
             } else {
                 binding.vpOnboarding.currentItem = binding.vpOnboarding.currentItem + 1

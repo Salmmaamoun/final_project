@@ -67,17 +67,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            app:endIconDrawable="@drawable/baseline_lock_open_24"
+            app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
             android:hint="Password">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:hint="Password"
                 android:inputType="numberPassword"  />
+
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -13,7 +13,7 @@ class SplachScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivitySplachScreenBinding= DataBindingUtil.setContentView(this, R.layout.activity_splach_screen)
-        val splashScreenDuration = 2000L // In milliseconds
+        val splashScreenDuration = 4000L // In milliseconds
         Thread(Runnable {
             Thread.sleep(splashScreenDuration)
             // Start the main activity after the splash screen duration
