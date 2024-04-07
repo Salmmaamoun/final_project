@@ -20,6 +20,8 @@ import com.example.data.remote.LoginRegiisterRetrofitInstance
 import com.example.data.repo.repo.RepoImp
 import com.example.domain.usecase.SignUpUseCase
 import android.Manifest
+import android.content.Context
+import android.content.SharedPreferences
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.ActivitySignUpBinding
 import com.example.graduation_project.ui.Login.LoginActivity
@@ -34,7 +36,7 @@ import java.util.Locale
 
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
-
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var viewModel: RegisterViewModel
     private var selectedImageUri: Uri? = null
     private var currentPhotoPath: String? = null
@@ -48,6 +50,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
                 // The picture was taken successfully
                 selectedImageUri?.let { uri ->
                     binding.imageViewProfile.setImageURI(uri)
+                    saveImageUri(selectedImageUri)
                     Log.d("img", uri.toString())
                 } ?: run {
                     Toast.makeText(this, "Selected image URI is null", Toast.LENGTH_SHORT).show()
@@ -65,6 +68,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
                 val imageUri = result.data?.data
                 selectedImageUri = imageUri
                 binding.imageViewProfile.setImageURI(imageUri)
+                saveImageUri(selectedImageUri)
             } else {
                 // Handle the case when the image selection was canceled
                 Toast.makeText(this, "Image selection canceled", Toast.LENGTH_SHORT).show()
@@ -73,6 +77,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
 
         val apiService = LoginRegiisterRetrofitInstance.getApi()
         val repository = RepoImp(apiService)
@@ -84,6 +90,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         setUpViews()
         observeRegistrationResult()
         observeValidationErrors()
+
     }
 
     private fun observeRegistrationResult() {
@@ -322,5 +329,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         }
     }
 
+    fun saveImageUri(uri: Uri?) {
+        val editor = sharedPreferences.edit()
+        editor.putString("imageUri", uri?.toString())
+        editor.apply()
+    }
 
 }

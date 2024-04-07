@@ -7,16 +7,16 @@
     </data>
 
     <FrameLayout
+        style="@style/SCREEN"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black_silver"
         tools:context=".ui.bottomnavigationScreens.home.HomeFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <ImageView
             android:id="@+id/mm"
             android:layout_width="@dimen/_150sdp"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:src="@drawable/img"
             android:text="@string/hello_blank_fragment" />
 
