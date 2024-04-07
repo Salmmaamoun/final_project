@@ -1,4 +1,4 @@
-package com.example.graduation_project.ui.bottomnavigationScreens
+package com.example.graduation_project.ui.bottomnavigationScreens.home
 
 import RegisterViewModel
 import android.os.Bundle

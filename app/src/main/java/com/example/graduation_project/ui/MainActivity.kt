@@ -7,7 +7,7 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.domain.entity.LoginRequest
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.ActivityMainBinding
-import com.example.graduation_project.ui.bottomnavigationScreens.HomeFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.home.HomeFragment
 import com.example.graduation_project.ui.bottomnavigationScreens.quran.SoraListFragment
 import com.example.graduation_project.ui.bottomnavigationScreens.Tafseer.TafseerFragment
 import com.example.weather_app.ui.base.BaseActivity
