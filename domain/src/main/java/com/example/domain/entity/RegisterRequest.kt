@@ -5,4 +5,6 @@ data class RegisterRequest(
     val email: String,
     val password: String,
     val gender: String,
-    val phone: String)
+    val phone: String,
+    val image: ByteArray?
+)

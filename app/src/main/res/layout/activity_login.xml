@@ -12,6 +12,19 @@
         android:layout_height="match_parent"
         style="@style/SCREEN"
         tools:context=".ui.Login.LoginActivity">
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/baseline_search_24"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/emailtextInputLayout"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailtextInputLayout"
@@ -98,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
-            android:text="Creat account?!"
+            android:text="Dont have account? Creat account?!"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />

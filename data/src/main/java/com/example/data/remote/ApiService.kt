@@ -6,9 +6,13 @@ import com.example.domain.entity.LoginResponse
 import com.example.domain.entity.RegisterResponse
 import com.example.domain.entity.SurahResponse
 import com.example.domain.entity.TafseerResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -19,8 +23,14 @@ interface ApiService {
     ):LoginResponse
 
     @POST("auth/register")
-    suspend fun register(
-        @Body request: RegisterRequest
+    @Multipart
+    suspend fun registerUser(
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part("phone") phone: RequestBody,
+        @Part image: MultipartBody.Part?
     ): RegisterResponse
     @GET("surahs")
     suspend fun getSurahs(
@@ -30,8 +40,8 @@ interface ApiService {
     @GET("editions/{editionId}")
     suspend fun getAyah(
         @Path("editionId") editionId: Int,
-        @Query("surah_id") surahNumber: Int,
-        @Query("number_in_surah") ayahNumber: Int
+        @Query("surah") surahNumber: Int,
+        @Query("ayah") ayahNumber: Int
     ):TafseerResponse
 
 }

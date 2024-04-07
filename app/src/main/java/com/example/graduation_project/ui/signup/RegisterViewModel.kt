@@ -1,3 +1,5 @@
+import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,10 +9,13 @@ import com.example.domain.entity.RegisterRequest
 import com.example.domain.entity.RegisterResponse
 import com.example.domain.usecase.SignUpUseCase
 import com.google.gson.Gson
+
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-class RegisterViewModel(private val useCase: SignUpUseCase) : ViewModel() {
+
+
+class RegisterViewModel(private val useCase: SignUpUseCase,private val context: Context) : ViewModel() {
 
     private val _registrationResult = MutableLiveData<RegisterResponse>()
     val registrationResult: LiveData<RegisterResponse> = _registrationResult
@@ -31,14 +36,25 @@ class RegisterViewModel(private val useCase: SignUpUseCase) : ViewModel() {
     private val _phoneError = MutableLiveData<String?>()
     val phoneError: LiveData<String?> = _phoneError
 
-    fun registerUser(name: String, email: String, password: String, passwordConfirmation: String, gender: String, phone: String) {
+    private val _selectedImageUri = MutableLiveData<Uri?>()
+    val selectedImageUri: LiveData<Uri?> = _selectedImageUri
+    fun registerUser(
+        name: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String,
+        gender: String,
+        phone: String,
+        image: Uri?
+    ) {
         if (!validateInputs(name, email, password, passwordConfirmation, phone)) {
             // Validation failed
             return
         }
 
         // Proceed with registration
-        val request = RegisterRequest(name, email, password, gender, phone)
+        val request = RegisterRequest(name, email, password, gender, phone,_selectedImageUri.value?.let { uri ->    convertUriToByteArray(uri)
+        })
         viewModelScope.launch {
             try {
                 val response = useCase.invoke(request)
@@ -70,5 +86,12 @@ class RegisterViewModel(private val useCase: SignUpUseCase) : ViewModel() {
             _passwordError.value = errors.password?.getOrNull(0)
             _phoneError.value = errors.phone?.getOrNull(0)
         }
+    }
+    private fun convertUriToByteArray(uri: Uri): ByteArray? {
+        val inputStream = context.contentResolver.openInputStream(uri)
+        return inputStream?.readBytes()
+    }
+    fun selectImageUri(uri: Uri?) {
+        _selectedImageUri.value = uri
     }
 }

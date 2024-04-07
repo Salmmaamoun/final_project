@@ -13,17 +13,12 @@ import com.example.graduation_project.ui.base.BaseFragment
 
 
 class QuranContainerFragment : BaseFragment<FragmentQuranContainerBinding>() {
-
-
     private lateinit var viewPager: ViewPager2
     private var startPage: Int = 0
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val args = arguments
         startPage = args?.getInt("startPage", 1) ?: 1
-
 
     }
 

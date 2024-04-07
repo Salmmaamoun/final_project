@@ -26,13 +26,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             TafseerFragment()
         )
 
-
-        // Configure the Meow Bottom Navigation
         binding.bottomNavigation.apply {
             add(MeowBottomNavigation.Model(1, R.drawable.quran))
             add(MeowBottomNavigation.Model(2, R.drawable.hom))
             add(MeowBottomNavigation.Model(3, R.drawable.qura))
 
+            replaceFragment(HomeFragment())
             setOnClickMenuListener {
                 val fragment = fragments[it.id - 1]
                 replaceFragment(fragment)

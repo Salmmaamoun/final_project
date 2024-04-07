@@ -16,7 +16,7 @@ data class TafseerDataItem(
 	@field:SerializedName("ayah")
 	val ayah: Ayah? = null,
 
-	@field:SerializedName("edition_id")
+	@field:SerializedName("e1dition_id")
 	val editionId: Int? = null,
 
 	@field:SerializedName("data")

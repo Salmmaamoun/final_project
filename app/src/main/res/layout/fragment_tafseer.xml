@@ -19,14 +19,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_120sdp"
-            android:hint=" Select the name of the surah"
+            android:hint="Click here"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="@dimen/_16sdp"
-            android:textStyle="bold|italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/surah_name_ed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="surah name..."
+            app:layout_constraintTop_toTopOf="@id/name_sura"
+            app:layout_constraintLeft_toRightOf="@id/name_sura"
+            android:textSize="@dimen/_16ssp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@id/name_sura"
+            />
 
         <EditText
             android:id="@+id/number_aya"
@@ -66,7 +77,7 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:text="واذكروا -يا بني إسرائيل- حين أَخَذْنا العهد المؤكَّد منكم بالإيمان بالله وإفراده بالعبادة، ورفعنا جبل الطور فوقكم، وقلنا لكم: خذوا الكتاب الذي أعطيناكم بجدٍ واجتهاد واحفظوه، وإلا أطبقنا عليكم الجبل، ولا تنسوا التوراة قولا وعملا كي تتقوني وتخافوا عقابي."
+                android:hint="result"
                 android:scrollbars="vertical"
                  />
 

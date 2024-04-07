@@ -1,6 +1,7 @@
 package com.example.graduation_project.ui.Login
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
@@ -10,6 +11,9 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.data.remote.ApiService
 import com.example.data.remote.LoginRegiisterRetrofitInstance
 import com.example.data.repo.datasource.DataSourceImp
@@ -32,6 +36,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         val apiService = LoginRegiisterRetrofitInstance.getApi()
         val repository = RepoImp(apiService)
         val useCase = LoginUseCase(repository)
@@ -78,7 +84,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
                 binding.editTextPassword.transformationMethod = null
             } else {
-                binding.editTextPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.editTextPassword.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
             }
         }
 
@@ -93,9 +100,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
 
 
-            if(!(email.isEmpty()&&password.isEmpty())){
+            if (!(email.isEmpty() && password.isEmpty())) {
                 viewModel.loginUser(email, password)
-                Toast.makeText(this,"Login successful", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Login successful", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()

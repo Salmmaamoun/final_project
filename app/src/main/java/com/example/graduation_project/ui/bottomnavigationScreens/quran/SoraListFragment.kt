@@ -38,7 +38,7 @@ class SoraListFragment : BaseFragment<FragmentSoraListBinding>() , SoraListAdapt
         fragment.arguments = bundle
 
         parentFragmentManager.beginTransaction()
-            .replace(R.id.con, fragment)
+            .replace(R.id.frame_container, fragment)
             .commit()
     }
 

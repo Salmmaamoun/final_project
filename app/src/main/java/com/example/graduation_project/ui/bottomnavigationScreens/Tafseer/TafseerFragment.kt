@@ -1,6 +1,7 @@
 package com.example.graduation_project.ui.bottomnavigationScreens.Tafseer
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,6 @@ import com.example.graduation_project.databinding.FragmentTafseerBinding
 import com.example.graduation_project.ui.base.BaseFragment
 import com.example.graduation_project.ui.bottomnavigationScreens.quran.QuraanContainer.QuranContainerFragment
 
-
 class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
     lateinit var surahName: String
     lateinit var surahNumber: String
@@ -29,9 +29,7 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val args = arguments
-        surahName = args?.getString("dataItem1").toString()
-        surahNumber = args?.getString("dataItem2").toString()
+        binding.nameSura.text = "choise name surah".toString()
         val apiService = LoginRegiisterRetrofitInstance.getApi()
         val repository = RepoImp(apiService)
         val useCase = AyaUseCase(repository)
@@ -39,21 +37,37 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
         tafseerViewModel =
             ViewModelProvider(this, viewModelFactory).get(TafseerViewModel::class.java)
         tafseerViewModel.ayahData.observe(viewLifecycleOwner) { tafseerData ->
-            binding.tafseerResult.text = tafseerData
+            binding.tafseerResult.text = tafseerData?.ayah?.text + ": \n" + tafseerData?.data
+
         }
         setView()
     }
 
     fun setView() {
 
+        val args = arguments
+        if (args != null) {
+            surahName = args.getString("dataItem1").toString()
+            surahNumber = args.getString("dataItem2").toString()
 
-        binding.nameSura.text = (surahNumber + "-> " + surahName).toString()
+            if (surahName.isNullOrEmpty()) {
+                binding.nameSura.text = "surah name"
+            } else {
+                binding.surahNameEd.text = surahNumber + "->" + surahName
+            }
+        } else {
+
+        }
+
+
+
+
 
         binding.searchButton.setOnClickListener {
-            // Retrieve ayah number from EditText
             val ayaNumber = binding.numberAya.text.toString()
 
             tafseerViewModel.fetchAyah(1, surahNumber.toInt(), ayaNumber.toInt())
+            Log.d("tafseer1", surahName + " " + surahNumber + " " + ayaNumber)
         }
 
         binding.nameSura.setOnClickListener {
@@ -62,7 +76,7 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
                 .replace(R.id.frame_container, fragment)
                 .commit()
         }
+
+
     }
-
-
 }
