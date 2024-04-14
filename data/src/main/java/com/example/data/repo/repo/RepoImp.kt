@@ -14,7 +14,9 @@ import okhttp3.RequestBody
 
 class RepoImp(val dataSource: ApiService?):Repo {
     override suspend fun login(request: LoginRequest): LoginResponse {
-        return dataSource!!.login(request)
+        val email = RequestBody.create("text/plain".toMediaTypeOrNull(), request.email)
+        val password = RequestBody.create("text/plain".toMediaTypeOrNull(), request.password)
+        return dataSource!!.login(email, password)
     }
 
     override suspend fun register(
@@ -23,6 +25,7 @@ class RepoImp(val dataSource: ApiService?):Repo {
         val name = RequestBody.create("text/plain".toMediaTypeOrNull(), request.name)
         val email = RequestBody.create("text/plain".toMediaTypeOrNull(), request.email)
         val password = RequestBody.create("text/plain".toMediaTypeOrNull(), request.password)
+        val passwordcon = RequestBody.create("text/plain".toMediaTypeOrNull(), request.password_confirmation)
         val gender = RequestBody.create("text/plain".toMediaTypeOrNull(), request.gender)
         val phone = RequestBody.create("text/plain".toMediaTypeOrNull(), request.phone)
 
@@ -30,7 +33,7 @@ class RepoImp(val dataSource: ApiService?):Repo {
             val requestImage = RequestBody.create("image/jpeg".toMediaTypeOrNull(), it)
             MultipartBody.Part.createFormData("image", "image.jpg", requestImage)
         }
-        return dataSource!!.registerUser(name, email, password, gender, phone, imagePart)
+        return dataSource!!.registerUser(name, email, password, password_confirmation = passwordcon, gender, phone, imagePart)
     }
 
     override suspend fun getSurahs(language: String): SurahResponse {

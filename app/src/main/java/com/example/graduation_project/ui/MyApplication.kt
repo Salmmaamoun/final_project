@@ -6,13 +6,13 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.bumptech.glide.request.RequestOptions
 import java.util.*
 
 class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        updateLocale(this)
     }
 
     companion object {

@@ -1,33 +1,20 @@
 package com.example.graduation_project.ui.Login
 
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.example.data.remote.ApiService
 import com.example.data.remote.LoginRegiisterRetrofitInstance
-import com.example.data.repo.datasource.DataSourceImp
 import com.example.data.repo.repo.RepoImp
-import com.example.domain.entity.LoginResponse
 import com.example.domain.usecase.LoginUseCase
-import com.example.domain.usecase.SignUpUseCase
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.ActivityLoginBinding
 import com.example.graduation_project.ui.MainActivity
 import com.example.graduation_project.ui.signup.SignUpActivity
-import com.example.graduation_project.ui.signup.ViewModelFactory
 import com.example.weather_app.ui.base.BaseActivity
-import kotlinx.coroutines.launch
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private lateinit var viewModel: LoginViewModel
@@ -37,18 +24,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val repository = RepoImp(apiService)
-        val useCase = LoginUseCase(repository)
-        val viewModelFactory = ViewModelFactory(useCase)
+        val viewModelFactory = ViewModelLoginFactory(getLoginUseCase(),this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
+
         setUpViews()
         observeRegistrationResult()
         observeValidationErrors()
 
     }
+    private fun getLoginUseCase(): LoginUseCase {
+        // Implement your SignUpUseCase initialization here
+        val apiService = LoginRegiisterRetrofitInstance.getApi()
+        val repository = RepoImp(apiService)
 
+        return LoginUseCase(repository)
+    }
     private fun observeRegistrationResult() {
         viewModel.loginResult.observe(this, Observer { response ->
             if (response != null) {
@@ -105,12 +95,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 Toast.makeText(this, "Login successful", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish()
+
 
             }
 
         }
     }
+
 
 
 }

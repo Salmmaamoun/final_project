@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class LoginViewModel(private val useCase:LoginUseCase) :ViewModel(){
     private val _loginResult = MutableLiveData<LoginResponse>()
@@ -26,30 +27,30 @@ class LoginViewModel(private val useCase:LoginUseCase) :ViewModel(){
 
     private val _passwordError = MutableLiveData<String?>()
     val passwordError: LiveData<String?> = _passwordError
-    fun loginUser( email: String, password: String) {
-        if (!validateInputs( email, password)) {
+    fun loginUser(email: String, password: String) {
+        if (!validateInputs(email, password)) {
             // Validation failed
             return
         }
 
-        // Proceed with registration
         val request = LoginRequest(email, password)
         viewModelScope.launch {
             try {
                 val response = useCase.invoke(request)
                 _loginResult.postValue(response)
-                Log.d("response", "Registration successful")
+                Log.d("LoginViewModel", "Login successful")
             } catch (e: HttpException) {
-                // Handle HTTP errors
                 val errorBody = e.response()?.errorBody()?.string()
                 val loginResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
                 handleRegistrationError(loginResponse)
-            } catch (e: Exception) {
-                // Handle other errors
-                Log.e("error", "Error registering user", e)
+                Log.e("LoginViewModel", "HTTP Exception: ${e.message()}", e)
+            }  catch (e: Exception) {
+                // Handle other exceptions
+                Log.e("LoginViewModel", "Error Login user", e)
             }
         }
     }
+
     private fun validateInputs( email: String, password: String): Boolean {
         // Validate inputs and set error messages accordingly
         return true // Return true if inputs are valid, false otherwise

@@ -16,14 +16,16 @@ import okhttp3.RequestBody
 
 class DataSourceImp(val apiSevice: ApiService): DataSourceRepo {
     override suspend fun login(request: LoginRequest): LoginResponse {
-
-        return apiSevice.login(request)
+        val email = RequestBody.create("text/plain".toMediaTypeOrNull(), request.email)
+        val password = RequestBody.create("text/plain".toMediaTypeOrNull(), request.password)
+        return apiSevice.login(email, password)
     }
 
     override suspend fun register(request: RegisterRequest): RegisterResponse {
         val name = RequestBody.create("text/plain".toMediaTypeOrNull(), request.name)
         val email = RequestBody.create("text/plain".toMediaTypeOrNull(), request.email)
         val password = RequestBody.create("text/plain".toMediaTypeOrNull(), request.password)
+        val passcon=RequestBody.create("text/plain".toMediaTypeOrNull(), request.password_confirmation)
         val gender = RequestBody.create("text/plain".toMediaTypeOrNull(), request.gender)
         val phone = RequestBody.create("text/plain".toMediaTypeOrNull(), request.phone)
 
@@ -32,7 +34,7 @@ class DataSourceImp(val apiSevice: ApiService): DataSourceRepo {
             MultipartBody.Part.createFormData("image", "image.jpg", requestImage)
         }
 
-        return apiSevice.registerUser(name, email, password, gender, phone, imagePart)
+        return apiSevice.registerUser(name, email, password, password_confirmation = passcon  , gender, phone, imagePart)
     }
 
     override suspend fun getSurahs(language: String):SurahResponse {

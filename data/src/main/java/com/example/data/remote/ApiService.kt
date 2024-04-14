@@ -18,8 +18,10 @@ import retrofit2.http.Query
 
 interface ApiService {
     @POST("auth/login")
+    @Multipart
     suspend fun login(
-        @Body request:LoginRequest,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody
     ):LoginResponse
 
     @POST("auth/register")
@@ -28,6 +30,7 @@ interface ApiService {
         @Part("name") name: RequestBody,
         @Part("email") email: RequestBody,
         @Part("password") password: RequestBody,
+        @Part("password_confirmation")password_confirmation:RequestBody,
         @Part("gender") gender: RequestBody,
         @Part("phone") phone: RequestBody,
         @Part image: MultipartBody.Part?
