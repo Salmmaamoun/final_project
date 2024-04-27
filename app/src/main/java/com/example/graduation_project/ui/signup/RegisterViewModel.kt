@@ -102,4 +102,15 @@ class RegisterViewModel(private val useCase: SignUpUseCase, private val context:
     fun selectImageUri(uri: Uri?) {
         _selectedImageUri.value = uri
     }
+    fun saveUserDataToPrefs(request: RegisterRequest) {
+        val prefs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        prefs.edit().putString("name", request.name).apply()
+        prefs.edit().putString("email", request.email).apply()
+        prefs.edit().putString("password", request.password).apply()
+        prefs.edit().putString("password_confirmation", request.password_confirmation).apply()
+        prefs.edit().putString("phone", request.phone).apply()
+        prefs.edit().putString("gender", request.gender).apply()
+        prefs.edit().putString("image", request.image?.toString()).apply()
+        Log.d("prefs", request.toString())
+    }
 }

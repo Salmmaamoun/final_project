@@ -8,5 +8,5 @@ import com.example.graduation_project.ui.bottomnavigationScreens.quran.quranPage
 class QuraanPageAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     private val NUM_PAGES = 604
     override fun getItemCount(): Int = NUM_PAGES
-    override fun createFragment(position: Int): Fragment = QuraanPageFragment(604-position)
+    override fun createFragment(position: Int): Fragment = QuraanPageFragment((604-position))
 }

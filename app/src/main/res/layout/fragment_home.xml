@@ -16,9 +16,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:src="@drawable/qura"
             android:scaleType="centerCrop" />
     </FrameLayout>
 </layout>

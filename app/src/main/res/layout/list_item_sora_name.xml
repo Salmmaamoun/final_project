@@ -39,15 +39,15 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-
-                <TextView
+              <!--  <TextView
                     android:id="@+id/sora_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:text="@{dataItem.id.toString()}"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="24sp" />
+                    android:textSize="24sp" /> -->
 
                 <TextView
                     android:id="@+id/sora_name"

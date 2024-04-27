@@ -12,6 +12,16 @@
         android:layout_height="match_parent"
         tools:context=".ui.bottomnavigationScreens.Tafseer.SurahNameFragment">
 
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="41dp"
+            android:layout_height="26dp"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:orientation="vertical"

@@ -8,8 +8,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        style="@style/SCREEN"
-        android:layout_height="match_parent"><!-- activity_screen_slide.xml -->
+        android:layout_height="match_parent">
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/quran_pager"
             android:layout_width="match_parent"

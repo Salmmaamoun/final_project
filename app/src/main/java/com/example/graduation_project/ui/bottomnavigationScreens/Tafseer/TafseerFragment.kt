@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.remote.LoginRegiisterRetrofitInstance
@@ -37,9 +39,20 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
         tafseerViewModel =
             ViewModelProvider(this, viewModelFactory).get(TafseerViewModel::class.java)
         tafseerViewModel.ayahData.observe(viewLifecycleOwner) { tafseerData ->
-            binding.tafseerResult.text = tafseerData?.ayah?.text + ": \n" + tafseerData?.data
+            binding.aya.text=tafseerData?.ayah?.text
+            binding.tafseerResult.text =   tafseerData?.data
 
         }
+
+        tafseerViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) {
+                // Show loading state
+                showLoadingState()
+            } else {
+                // Hide loading state
+                hideLoadingState()
+            }
+        })
         setView()
     }
 
@@ -50,13 +63,15 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
             surahName = args.getString("dataItem1").toString()
             surahNumber = args.getString("dataItem2").toString()
 
-            if (surahName.isNullOrEmpty()) {
-                binding.nameSura.text = "surah name"
+            if (surahName.isNullOrEmpty() || surahNumber.isNullOrEmpty()) {
+                // Handle the case when surahName or surahNumber is null or empty
+                binding.surahNameEd.text = "Surah name and number are missing"
             } else {
-                binding.surahNameEd.text = surahNumber + "->" + surahName
+                binding.surahNameEd.text = "$surahNumber - $surahName"
             }
         } else {
-
+            // Handle the case when arguments are null
+            binding.surahNameEd.text = "Surah name and number are missing"
         }
 
 
@@ -66,8 +81,13 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
         binding.searchButton.setOnClickListener {
             val ayaNumber = binding.numberAya.text.toString()
 
-            tafseerViewModel.fetchAyah(1, surahNumber.toInt(), ayaNumber.toInt())
-            Log.d("tafseer1", surahName + " " + surahNumber + " " + ayaNumber)
+            if (ayaNumber.isNotEmpty()) {
+                tafseerViewModel.fetchAyah(1, surahNumber.toInt(), ayaNumber.toInt())
+                Log.d("tafseer1", surahName + " " + surahNumber + " " + ayaNumber)
+            } else {
+                // Handle the case when ayaNumber is empty
+                Toast.makeText(requireContext(), "Please enter a valid aya number", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.nameSura.setOnClickListener {
@@ -78,5 +98,21 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
         }
 
 
+    }
+    private fun showLoadingState() {
+        // Disable buttons
+        binding.nameSura.isEnabled = false
+        binding.numberAya.isEnabled = false
+        binding.searchButton.isEnabled = false
+
+        binding.loadingIndicator.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingState() {
+        // Enable buttons
+        binding.nameSura.isEnabled = true
+        binding.numberAya.isEnabled =true
+        binding.searchButton.isEnabled =true
+        binding.loadingIndicator.visibility = View.GONE
     }
 }

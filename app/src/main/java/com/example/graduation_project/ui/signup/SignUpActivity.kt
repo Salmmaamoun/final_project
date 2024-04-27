@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -15,12 +16,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.remote.LoginRegiisterRetrofitInstance
 import com.example.data.repo.repo.RepoImp
+import com.example.domain.entity.RegisterRequest
 import com.example.domain.usecase.SignUpUseCase
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.ActivitySignUpBinding
 import com.example.graduation_project.ui.Login.LoginActivity
 
 import com.example.weather_app.ui.base.BaseActivity
+import com.google.gson.Gson
+
+
 
 private const val TAG = "SignUpActivity"
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
@@ -63,11 +68,32 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         return SignUpUseCase(repository)
     }
 
+
     private fun observeRegistrationResult() {
         viewModel.registrationResult.observe(this, Observer { response ->
             if (response != null) {
                 if (response.statusCode != 422) {
                     Log.d("ss", "Successful registration")
+
+
+                    // Save the JSON string to SharedPreferences
+
+                    val name = binding.editTextUsername.text.toString()
+                    val email = binding.editTextEmail.text.toString()
+                    val password = binding.editTextPassword.text.toString()
+                    val passwordConfirmation = binding.editTextPasswordconfirm.text.toString()
+                    Log.d("passcon",passwordConfirmation)
+                    Log.d("pass",password)
+                    val gender = if (binding.radioButtonMale.isChecked) "male" else "female"
+                    val phone = binding.editTextPhone.text.toString()
+                    val image = viewModel.selectedImageUri.value
+                    val request = RegisterRequest(
+                        name, email, password,passwordConfirmation, gender, phone,
+                        image?.let { uri -> convertUriToByteArray(uri) }
+                    )
+
+                    viewModel.saveUserDataToPrefs(request)
+                    Log.d("userDataJson", viewModel.saveUserDataToPrefs(request).toString())
                 } else {
                     Log.d("ss", "Error during registration")
                 }
@@ -167,4 +193,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             }
         }
     }
+    private fun convertUriToByteArray(uri: Uri): ByteArray? {
+        val inputStream = this.contentResolver.openInputStream(uri)
+        return inputStream?.readBytes()
+    }
+
 }

@@ -4,6 +4,7 @@ import SurahAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.remote.LoginRegiisterRetrofitInstance
@@ -42,15 +43,26 @@ class SurahNameFragment : BaseFragment <FragmentSurahNameBinding>(),
           adapter=SurahAdapter(this)
 
         binding.soraList.adapter = adapter
+        suraViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) {
+                // Show loading state
+                showLoadingState()
+            } else {
+                // Hide loading state
+                hideLoadingState()
+            }
+        })
 
         suraViewModel.dataItems.observe(viewLifecycleOwner) { dataItems ->
             dataItems?.let {
                 adapter.setData(it)
             }
+
+
         }
 
         // Call method to fetch data
-        suraViewModel.fetchData("en")
+        suraViewModel.fetchData("ar")
 }
 
     override fun onSurahItemClick(dataItem: DataItem) {
@@ -63,5 +75,18 @@ class SurahNameFragment : BaseFragment <FragmentSurahNameBinding>(),
         parentFragmentManager.beginTransaction()
             .replace(R.id.frame_container, fragment)
             .commit()
+    }
+    private fun showLoadingState() {
+        // Disable buttons or interactions if necessary
+        binding.soraList.isEnabled = false
+
+        binding.loading.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingState() {
+        // Enable buttons or interactions if necessary
+        binding.soraList.isEnabled = true
+
+        binding.loading.visibility = View.GONE
     }
 }

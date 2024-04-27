@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.FragmentPageQuraanBinding
 import com.example.graduation_project.ui.base.BaseFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.quran.tafseer.TafseerBottomSheetFragment
 
 
 class QuraanPageFragment :BaseFragment<FragmentPageQuraanBinding>{
@@ -20,6 +21,11 @@ class QuraanPageFragment :BaseFragment<FragmentPageQuraanBinding>{
 
     constructor(pageNumber: Int) : super() {
         this.pageNumber = pageNumber
+        Log.d("cons",pageNumber.toString())
+    }
+    fun getPageNumber(): Int {
+        return pageNumber
+        Log.d("pagenum",pageNumber.toString())
     }
 
     override val layoutFragmentId: Int
@@ -34,12 +40,20 @@ class QuraanPageFragment :BaseFragment<FragmentPageQuraanBinding>{
         super.onViewCreated(view, savedInstanceState)
         quranViewModel = ViewModelProvider(this).get(QuranViewModel::class.java)
 
-        val quranPage = quranViewModel.getQuranImageByPageNumber(requireContext(), pageNumber)
-        if (quranPage != 0) {
-            binding.quranPage.setImageResource(quranPage)
+        val quranPageBitmap = quranViewModel.getQuranImageByPageNumber(requireContext(), pageNumber)
+        if (quranPageBitmap != null) {
+            binding.quranPage.setImageBitmap(quranPageBitmap)
             Log.d("salma", "Quran page loaded successfully.")
         } else {
             Log.e("salma", "Failed to load Quran page.")
+        }
+        binding.btnTfseer.setOnClickListener {
+            val bottomSheet = TafseerBottomSheetFragment()
+            val args = Bundle()
+            args.putInt("pageNumber", getPageNumber())
+            bottomSheet.arguments = args
+            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+            Log.d("sheet", "successfully.")
         }
     }
 

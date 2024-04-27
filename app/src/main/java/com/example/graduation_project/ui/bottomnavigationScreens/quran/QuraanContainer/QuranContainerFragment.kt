@@ -1,6 +1,7 @@
 package com.example.graduation_project.ui.bottomnavigationScreens.quran.QuraanContainer
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,8 @@ class QuranContainerFragment : BaseFragment<FragmentQuranContainerBinding>() {
         binding.quranPager.setCurrentItem(604 - startPage, false)
 
     }
+    /////////////
+
 
 
 }

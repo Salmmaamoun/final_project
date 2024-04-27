@@ -13,6 +13,7 @@ import com.example.graduation_project.ui.bottomnavigationScreens.quran.data.pojo
  abstract class QuranDatabase : RoomDatabase() {
 
         abstract fun quranDao(): QuranDao
+        abstract fun tfseerDao(): TfseerDao
 
         companion object {
             @Volatile

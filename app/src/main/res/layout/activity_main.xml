@@ -11,14 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
-        <TextView
-            android:id="@+id/dd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/frame_container"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+
 
         <FrameLayout
             android:id="@+id/frame_container"
@@ -26,18 +19,19 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dd" />
+            app:layout_constraintTop_toTopOf="parent"
+          />
 
 
         <com.etebarian.meowbottomnavigation.MeowBottomNavigation
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:mbn_backgroundBottomColor="#FFFFFF"
+            android:layout_alignParentBottom="false"
+            app:mbn_backgroundBottomColor="#E4E4E4"
             app:mbn_circleColor="#FFFFFF"
             app:mbn_countBackgroundColor="#FF0000"
-            app:mbn_countTextColor="#FFFFFF"
+            app:mbn_countTextColor="#E4E4E4"
             app:mbn_defaultIconColor="#90A4AE"
             app:mbn_rippleColor="#90A4AE"
             app:mbn_selectedIconColor="@color/primrycolor"

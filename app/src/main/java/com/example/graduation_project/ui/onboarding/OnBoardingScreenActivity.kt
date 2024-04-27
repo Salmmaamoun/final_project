@@ -61,7 +61,7 @@ class OnBoardingScreenActivity() : BaseActivity<ActivityOnBoardingScreenBinding>
         // Implement next button
         binding.btnNext.setOnClickListener {
            if (binding.vpOnboarding.currentItem == onboardingScreens.size - 1) {
-            val intent= Intent(it.context,LoginActivity::class.java)
+            val intent= Intent(it.context,MainActivity::class.java)
                 startActivity(intent)
             } else {
                 binding.vpOnboarding.currentItem = binding.vpOnboarding.currentItem + 1

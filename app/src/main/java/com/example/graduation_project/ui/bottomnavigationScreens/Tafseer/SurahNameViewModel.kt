@@ -17,18 +17,22 @@ class SurahNameViewModel(private val useCase: SurahNameUseCase):ViewModel() {
 
     private val _dataItems = MutableLiveData<List<DataItem>?>()
     val dataItems: MutableLiveData<List<DataItem>?> = _dataItems
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
     fun fetchData(language: String) {
-        CoroutineScope(Dispatchers.Main).launch {
+        viewModelScope.launch {
             try {
-
-                val response= useCase.invoke(language)
+                _isLoading.value = true
+                val response = useCase.invoke(language)
                 _dataItems.postValue(response.data as List<DataItem>?)
             } catch (e: Exception) {
-                    _error.value = e.message
+                _error.value = e.message
+            } finally {
+                _isLoading.value = false
             }
         }
     }
