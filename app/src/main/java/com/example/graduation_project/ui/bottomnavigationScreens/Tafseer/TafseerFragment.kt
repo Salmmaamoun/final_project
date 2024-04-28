@@ -57,7 +57,6 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
     }
 
     fun setView() {
-
         val args = arguments
         if (args != null) {
             surahName = args.getString("dataItem1").toString()
@@ -65,25 +64,26 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
 
             if (surahName.isNullOrEmpty() || surahNumber.isNullOrEmpty()) {
                 // Handle the case when surahName or surahNumber is null or empty
-                binding.surahNameEd.text = "Surah name and number are missing"
+                binding.surahNameEd.text = "Surah name is missing"
             } else {
                 binding.surahNameEd.text = "$surahNumber - $surahName"
             }
         } else {
             // Handle the case when arguments are null
-            binding.surahNameEd.text = "Surah name and number are missing"
+            binding.surahNameEd.text = "Surah name is missing"
         }
 
-
-
-
-
         binding.searchButton.setOnClickListener {
-            val ayaNumber = binding.numberAya.text.toString()
+            val ayaNumber = binding.numberAya.text.toString().trim()
 
             if (ayaNumber.isNotEmpty()) {
-                tafseerViewModel.fetchAyah(1, surahNumber.toInt(), ayaNumber.toInt())
-                Log.d("tafseer1", surahName + " " + surahNumber + " " + ayaNumber)
+                if (binding.surahNameEd.text.isNullOrEmpty()) {
+                    // Handle the case when surahNameEd is null or empty
+                    Toast.makeText(requireContext(), "Surah name is missing", Toast.LENGTH_SHORT).show()
+                } else {
+                    tafseerViewModel.fetchAyah(1, surahNumber.toInt(), ayaNumber.toInt())
+                    Log.d("tafseer1", surahName + " " + surahNumber + " " + ayaNumber)
+                }
             } else {
                 // Handle the case when ayaNumber is empty
                 Toast.makeText(requireContext(), "Please enter a valid aya number", Toast.LENGTH_SHORT).show()
@@ -96,8 +96,6 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
                 .replace(R.id.frame_container, fragment)
                 .commit()
         }
-
-
     }
     private fun showLoadingState() {
         // Disable buttons
