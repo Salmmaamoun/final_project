@@ -26,7 +26,7 @@ class TafseerViewModel(private val useCase: AyaUseCase) : ViewModel() {
             try {
                 val response = useCase(editionId, surahNumber, ayahNumber)
                 val dataItem = response.data?.find {
-                    it?.ayah?.numberInSurah == ayahNumber && it?.ayah?.surahId == surahNumber
+                    it?.ayah?.numberInSurah == ayahNumber && it?.ayah?.surahId== surahNumber
                 }
                 _ayahData.postValue(dataItem)
                 _isLoading.postValue(false)

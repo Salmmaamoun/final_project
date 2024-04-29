@@ -1,5 +1,6 @@
 package com.example.graduation_project.ui.bottomnavigationScreens.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.entity.Aya
@@ -17,6 +18,7 @@ class SearchLexicalViewModel(private val searchLexicalUseCase: SearchLexicalUseC
         viewModelScope.launch {
             val response = searchLexicalUseCase(term)
             _searchResults.value = response.data?.flatMap { it.ayahs } ?: emptyList()
+            Log.d("ds",response.data.toString())
         }
     }
 }
