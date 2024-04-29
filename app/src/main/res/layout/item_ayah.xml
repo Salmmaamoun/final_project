@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="ayah"
+            type="com.example.domain.entity.Aya" />
+    </data>
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Ayah Text -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{ayah.text}"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:gravity="start"
+            tools:text="This is an example Ayah text" />
+
+        <!-- Other Views for Ayah Information (Optional) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{`Surah: ` + ayah.surah_id}"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:padding="8dp"
+            android:background="@android:color/white"
+            android:gravity="start"
+            tools:text="Surah: 1" />
+
+        <!-- Add more views for other Ayah information as needed -->
+
+    </LinearLayout>
+
+</layout>
