@@ -1,5 +1,6 @@
 package com.example.data.remote
 
+import com.example.domain.entity.LexicalSearchResponse
 import com.example.domain.entity.LoginRequest
 import com.example.domain.entity.RegisterRequest
 import com.example.domain.entity.LoginResponse
@@ -46,5 +47,8 @@ interface ApiService {
         @Query("surah") surahNumber: Int,
         @Query("ayah") ayahNumber: Int
     ):TafseerResponse
+
+    @GET("search")
+    suspend fun getSearchLexical(@Query("term") term: String): LexicalSearchResponse
 
 }

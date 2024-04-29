@@ -3,6 +3,7 @@ package com.example.data.repo.datasource
 
 import com.example.data.remote.ApiService
 import com.example.domain.abstraction.DataSourceRepo.DataSourceRepo
+import com.example.domain.entity.LexicalSearchResponse
 import com.example.domain.entity.LoginRequest
 import com.example.domain.entity.RegisterRequest
 import com.example.domain.entity.LoginResponse
@@ -49,4 +50,7 @@ class DataSourceImp(val apiSevice: ApiService): DataSourceRepo {
         return apiSevice.getAyah(editionId,surahNumber,ayahNumber)
     }
 
+    override suspend fun getSearchLexical(term: String): LexicalSearchResponse {
+        return apiSevice.getSearchLexical(term)
+    }
 }
