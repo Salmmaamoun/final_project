@@ -10,4 +10,5 @@ interface TfseerDao {
 
     @Query("SELECT * FROM quran WHERE page = :pageNumber")
     fun getPageAyatByNumber(pageNumber: Int): LiveData<List<Aya>>
+
 }

@@ -14,7 +14,6 @@ object LoginRegiisterRetrofitInstance {
     private const val TOKEN = "19|2fl6hKslOFb7dVAHr904AEECOY25KjdpQL8Io1hz"
     val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
-        Log.d("massge2", level.toString())
     }
     private val tokenInterceptor = Interceptor { chain ->
         val newRequest = chain.request().newBuilder()
@@ -25,20 +24,21 @@ object LoginRegiisterRetrofitInstance {
 
     val okHttpClient = OkHttpClient.Builder()
         .connectionPool(ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
-        . protocols(listOf(Protocol.HTTP_1_1))
+        .protocols(listOf(Protocol.HTTP_1_1))
         .addInterceptor(loggingInterceptor)
         .addInterceptor(tokenInterceptor)
+        .connectTimeout(30, TimeUnit.SECONDS)  // Increase connection timeout
+        .readTimeout(30, TimeUnit.SECONDS)     // Increase read timeout
+        .writeTimeout(30, TimeUnit.SECONDS)    // Increase write timeout
         .build()
+
     val retrofit = Retrofit.Builder()
-
         .baseUrl("https://shubramasrshops.000webhostapp.com/api/v1/")
-        .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
         .build()
-
 
     fun getApi(): ApiService? {
-        Log.e("massge3", HttpLoggingInterceptor.Level.BODY.toString())
-        return retrofit?.create(ApiService::class.java)
+        return retrofit.create(ApiService::class.java)
     }
-
 }

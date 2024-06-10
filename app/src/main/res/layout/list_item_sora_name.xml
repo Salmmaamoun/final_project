@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-              <!--  <TextView
+            <TextView
                     android:id="@+id/sora_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,14 +47,22 @@
                     android:text="@{dataItem.id.toString()}"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="24sp" /> -->
+                    android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/concate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/sora_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="@{dataItem.name}"
+                    android:text="@{dataItem.name }"
                     android:textColor="@color/black"
                     android:textStyle="bold|italic"
                     android:textSize="25sp" />

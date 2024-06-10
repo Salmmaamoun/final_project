@@ -1,8 +1,9 @@
 package com.example.data.repo.repo
 
-import com.example.data.remote.ApiService
+import com.example.domain.abstraction.DataSourceRepo.DataSourceRepo
 import com.example.domain.abstraction.Repo.Repo
-import com.example.domain.entity.LexicalSearchResponse
+import com.example.domain.entity.LexicalResponse
+import com.example.domain.entity.LexicalResponseItem
 import com.example.domain.entity.LoginRequest
 import com.example.domain.entity.RegisterRequest
 import com.example.domain.entity.LoginResponse
@@ -13,11 +14,11 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-class RepoImp(val dataSource: ApiService?):Repo {
+class RepoImp(val dataSource: DataSourceRepo?):Repo {
     override suspend fun login(request: LoginRequest): LoginResponse {
         val email = RequestBody.create("text/plain".toMediaTypeOrNull(), request.email)
         val password = RequestBody.create("text/plain".toMediaTypeOrNull(), request.password)
-        return dataSource!!.login(email, password)
+        return dataSource!!.login(request)
     }
 
     override suspend fun register(
@@ -34,7 +35,7 @@ class RepoImp(val dataSource: ApiService?):Repo {
             val requestImage = RequestBody.create("image/jpeg".toMediaTypeOrNull(), it)
             MultipartBody.Part.createFormData("image", "image.jpg", requestImage)
         }
-        return dataSource!!.registerUser(name, email, password, password_confirmation = passwordcon, gender, phone, imagePart)
+        return dataSource!!.register(request)
     }
 
     override suspend fun getSurahs(language: String): SurahResponse {
@@ -49,7 +50,7 @@ class RepoImp(val dataSource: ApiService?):Repo {
         return dataSource!!.getAyah(editionId,surahNumber,ayahNumber)
     }
 
-    override suspend fun getSearchLexical(term: String): LexicalSearchResponse {
-        return dataSource!!.getSearchLexical(term)
+    override suspend fun getSearchLexical(term: String): List<LexicalResponseItem> {
+        return (dataSource?.getSearchLexical(term) ?: null) as List<LexicalResponseItem>
     }
 }
