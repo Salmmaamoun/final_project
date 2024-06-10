@@ -20,12 +20,11 @@ class TfseerViewModel(app: Application) : AndroidViewModel(app) {
     private val tfseerPage = TfseerProvider()
     val tfseerLiveData = MutableLiveData<Tfseer>()
     val tfseerStateFlow = MutableStateFlow<Tfseer>(Tfseer())
-    var tfseerCallback : ((Tfseer) -> Unit) ={}
-    var startWork: ((Boolean) -> Unit) ={}
-    var arryListTfseer = ArrayList<Tfseer>()
+    var tfseerCallback: ((Tfseer) -> Unit)? = null
+    var startWork: ((Boolean) -> Unit) = {}
+    var tfseerList = ArrayList<Tfseer>()
     var startWorkToGetTfseer = false
     val TfseerDao = QuranDatabase.getInstance(getApplication())?.tfseerDao()
-
 
     init {
         getAllTfseer()
@@ -34,23 +33,37 @@ class TfseerViewModel(app: Application) : AndroidViewModel(app) {
     @SuppressLint("SuspiciousIndentation")
     private fun getAllTfseer() {
         viewModelScope.launch(Dispatchers.IO) {
-            arryListTfseer = tfseerPage.getAllTfasser(getApplication())!!
-                startWork (true)
-
-
-
+            tfseerList = tfseerPage.getAllTfasser(getApplication())!!
+            startWork(true)
         }
     }
 
-     fun getTfseerByPage(soraNumber: String, ayaNumber: String) {
-             tfseerCallback(arryListTfseer
-                 ?.filter { tfseer: Tfseer -> soraNumber == tfseer.number }
-                 ?.filter { tfseer: Tfseer -> ayaNumber == tfseer.aya }
-             !![0])
+    suspend fun getTfseerByPage(soraNumber: String, ayaNumber: String): Tfseer? {
+        return withContext(Dispatchers. IO) {
+            if (tfseerList.isNotEmpty()) {
+                try {
+                    Log.d("getTfseerByPage", "Retrieving Tafseer for Sura $soraNumber, Aya $ayaNumber")
+                    tfseerList
+                        .filter { tfseer: Tfseer -> soraNumber == tfseer.number }
+                        .filter { tfseer: Tfseer -> ayaNumber == tfseer.aya }
+                        .firstOrNull()?.also {
+                            Log.d("getTfseerByPage", "Tfseer number: ${it.aya},Tfseer Aya: ${it.text}")
+                            withContext(Dispatchers.Main) {
+                                tfseerCallback?.invoke(it)
+                            }
+
+                        }
+                } catch (e: Exception) {
+                    Log.d("getTfseerByPage", "Error retrieving Tafseer for Sura $soraNumber, Aya $ayaNumber: $e")
+                    println("Error retrieving Tafseer for Sura $soraNumber, Aya $ayaNumber: $e")
+                    null
+                }
+            } else {
+                null
+            }
+        }
     }
 
     fun getTfseerAyaByPage(pageNumber: Int) =
-        TfseerDao!!.getPageAyatByNumber(pageNumber)
-
-
+        TfseerDao?.getPageAyatByNumber(pageNumber)
 }

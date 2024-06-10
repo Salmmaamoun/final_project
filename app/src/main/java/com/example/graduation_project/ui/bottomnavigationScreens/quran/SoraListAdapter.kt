@@ -27,14 +27,11 @@ class SoraListAdapter(private val index: List<Sora>, private val itemClickListen
     inner class ViewHolderList(private val binding: ListItemSoraBinding):RecyclerView.ViewHolder(binding.root) {
         private val soraNumber: TextView = binding.soraNumber
         private val soraName: TextView = binding.soraName
-       /* private val from: TextView = binding.soraStart
-        private val to: TextView = binding.soraEnd
-        private val wordTo: TextView = binding.wordTo
-        private val wordFrom: TextView = binding.wordFrom*/
+
 
         fun bindSora(sora: Sora) {
             soraNumber.text = sora.soraNumber.toString()
-            soraName.text = sora.arabicName+"::"+sora.englishName
+            soraName.text =sora.arabicName+"::"+sora.englishName+" - "
           //  from.text = sora.startPage.toString()
            // to.text = sora.endPage.toString()
             // Bind other views as needed

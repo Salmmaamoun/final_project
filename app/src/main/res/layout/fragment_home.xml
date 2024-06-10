@@ -20,7 +20,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_120sdp"
             android:drawableEnd="@drawable/baseline_search_24"
-            android:text="Search here......"
+            android:hint="Search here......"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />

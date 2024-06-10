@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.remote.LoginRegiisterRetrofitInstance
+import com.example.data.repo.datasource.DataSourceImp
 import com.example.data.repo.repo.RepoImp
 import com.example.domain.entity.Aya
 import com.example.domain.usecase.AyaUseCase
@@ -73,7 +74,8 @@ class HomeFragment :  Fragment() {
 
         // Initialize RecyclerView
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val repository = RepoImp(apiService)
+        val dataSource= apiService?.let { DataSourceImp(it) }
+        val repository = RepoImp(dataSource)
         val useCase =SearchLexicalUseCase(repository)
         val viewModelFactory = SearchViewModelFactory(useCase)
         searchLexicalViewModel= ViewModelProvider(this, viewModelFactory).get(SearchLexicalViewModel::class.java)

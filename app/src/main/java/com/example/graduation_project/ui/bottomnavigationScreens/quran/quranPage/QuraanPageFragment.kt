@@ -15,6 +15,8 @@ import com.example.graduation_project.ui.bottomnavigationScreens.quran.tafseer.T
 
 
 class QuraanPageFragment :BaseFragment<FragmentPageQuraanBinding>{
+
+
     private var pageNumber:Int=0
 
     private lateinit var quranViewModel:QuranViewModel
@@ -47,14 +49,7 @@ class QuraanPageFragment :BaseFragment<FragmentPageQuraanBinding>{
         } else {
             Log.e("salma", "Failed to load Quran page.")
         }
-        binding.btnTfseer.setOnClickListener {
-            val bottomSheet = TafseerBottomSheetFragment()
-            val args = Bundle()
-            args.putInt("pageNumber", getPageNumber())
-            bottomSheet.arguments = args
-            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
-            Log.d("sheet", "successfully.")
-        }
+   
     }
 
 
