@@ -47,14 +47,7 @@ class QuraanPageFragment :BaseFragment<FragmentPageQuraanBinding>{
         } else {
             Log.e("salma", "Failed to load Quran page.")
         }
-        binding.btnTfseer.setOnClickListener {
-            val bottomSheet = TafseerBottomSheetFragment()
-            val args = Bundle()
-            args.putInt("pageNumber", getPageNumber())
-            bottomSheet.arguments = args
-            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
-            Log.d("sheet", "successfully.")
-        }
+
     }
 
 

@@ -1,15 +1,12 @@
 package com.example.data.remote
 
-import com.example.domain.entity.LexicalSearchResponse
-import com.example.domain.entity.LoginRequest
-import com.example.domain.entity.RegisterRequest
+import com.example.domain.entity.LexicalResponseItem
 import com.example.domain.entity.LoginResponse
 import com.example.domain.entity.RegisterResponse
 import com.example.domain.entity.SurahResponse
 import com.example.domain.entity.TafseerResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -49,6 +46,6 @@ interface ApiService {
     ):TafseerResponse
 
     @GET("search")
-    suspend fun getSearchLexical(@Query("term") term: String): LexicalSearchResponse
+    suspend fun getSearchLexical(@Query("term") term: String):List<LexicalResponseItem>
 
 }

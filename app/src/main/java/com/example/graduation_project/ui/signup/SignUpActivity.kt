@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.remote.LoginRegiisterRetrofitInstance
+import com.example.data.repo.datasource.DataSourceImp
 import com.example.data.repo.repo.RepoImp
 import com.example.domain.entity.RegisterRequest
 import com.example.domain.usecase.SignUpUseCase
@@ -23,8 +24,6 @@ import com.example.graduation_project.databinding.ActivitySignUpBinding
 import com.example.graduation_project.ui.Login.LoginActivity
 
 import com.example.weather_app.ui.base.BaseActivity
-import com.google.gson.Gson
-
 
 
 private const val TAG = "SignUpActivity"
@@ -64,7 +63,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     private fun getSignUpUseCase(): SignUpUseCase {
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val repository = RepoImp(apiService)
+        val dataSource = apiService?.let { DataSourceImp(it) }
+        val repository = RepoImp(dataSource)
         return SignUpUseCase(repository)
     }
 

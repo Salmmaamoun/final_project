@@ -1,6 +1,6 @@
 package com.example.domain.abstraction.Repo
 
-import com.example.domain.entity.LexicalSearchResponse
+import com.example.domain.entity.LexicalResponseItem
 import com.example.domain.entity.LoginRequest
 import com.example.domain.entity.LoginResponse
 import com.example.domain.entity.RegisterRequest
@@ -15,5 +15,5 @@ interface Repo {
     suspend fun getSurahs(language: String):SurahResponse
     suspend fun getAyah(editionId: Int, surahNumber: Int, ayahNumber: Int): TafseerResponse
 
-    suspend fun getSearchLexical(term : String) : LexicalSearchResponse
+    suspend fun getSearchLexical(term : String) :List<LexicalResponseItem>
 }

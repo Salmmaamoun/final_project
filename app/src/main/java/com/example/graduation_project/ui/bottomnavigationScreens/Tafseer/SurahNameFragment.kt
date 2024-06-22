@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.remote.LoginRegiisterRetrofitInstance
+import com.example.data.repo.datasource.DataSourceImp
 import com.example.data.repo.repo.RepoImp
 import com.example.domain.entity.DataItem
 import com.example.domain.usecase.SurahNameUseCase
@@ -34,7 +35,8 @@ class SurahNameFragment : BaseFragment <FragmentSurahNameBinding>(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val repository = RepoImp(apiService)
+        val dataSource = apiService?.let { DataSourceImp(it) }
+        val repository = RepoImp(dataSource)
         val useCase = SurahNameUseCase(repository)
         val viewModelFactory = ViewModelFactory(useCase)
 
