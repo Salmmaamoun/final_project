@@ -1,9 +1,11 @@
 package com.example.graduation_project.ui.bottomnavigationScreens.home
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
@@ -77,17 +79,17 @@ class HomeFragment :  Fragment() {
         binding.recyclerView.adapter = adapter
 
         // Set up search button click listener
-        binding.linearLayout.setOnClickListener {
+        binding.lexicalButton.setOnClickListener {
             val searchTerm = binding.searchEditText.text.toString()
             searchLexicalViewModel.searchLexical(searchTerm)
+           // Log.e("lexicalSearchBtn" ,"lexicalSearchBtn")
         }
 
         // Observe search results
-        lifecycleScope.launchWhenStarted {
-            searchLexicalViewModel.searchResults.collect { ayahs ->
+            searchLexicalViewModel.searchResults.observe(viewLifecycleOwner, Observer { ayahs ->
+                // This code block will be executed whenever searchResultsLiveData is updated
                 adapter.submitList(ayahs)
-            }
-        }
+            })
     }
 
 

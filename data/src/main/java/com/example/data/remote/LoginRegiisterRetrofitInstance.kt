@@ -32,7 +32,8 @@ object LoginRegiisterRetrofitInstance {
     val retrofit = Retrofit.Builder()
 
         .baseUrl("https://shubramasrshops.000webhostapp.com/api/v1/")
-        .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
         .build()
 
 

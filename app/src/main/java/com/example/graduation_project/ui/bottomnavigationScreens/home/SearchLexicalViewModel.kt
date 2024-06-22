@@ -1,6 +1,8 @@
 package com.example.graduation_project.ui.bottomnavigationScreens.home
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.entity.Aya
@@ -11,14 +13,21 @@ import kotlinx.coroutines.launch
 
 class SearchLexicalViewModel(private val searchLexicalUseCase: SearchLexicalUseCase) : ViewModel() {
 
-    private val _searchResults = MutableStateFlow<List<Aya>>(emptyList())
-    val searchResults: StateFlow<List<Aya>> = _searchResults
+    private val _searchResults = MutableLiveData<List<Aya>>(emptyList())
+    val searchResults: LiveData<List<Aya>> = _searchResults
 
+    private val _error =MutableLiveData<String>()
+    val error :LiveData<String> =_error
     fun searchLexical(term: String) {
         viewModelScope.launch {
-            val response = searchLexicalUseCase(term)
-            _searchResults.value = response.data?.flatMap { it.ayahs } ?: emptyList()
-            Log.d("ds",response.data.toString())
+           try {
+               val response = searchLexicalUseCase(term)
+              // _searchResults.value = response.data?.flatMap { it.ayahs } ?: emptyList()
+                Log.d("datasearch",response.data.toString())
+           } catch (e : Exception){
+               _error.value="Error :${e.message}"
+               Log.d("datasearch",e.message.toString())
+           }
         }
     }
 }
