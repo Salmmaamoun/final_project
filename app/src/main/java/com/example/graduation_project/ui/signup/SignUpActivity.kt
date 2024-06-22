@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.remote.LoginRegiisterRetrofitInstance
-import com.example.data.repo.datasource.DataSourceImp
 import com.example.data.repo.repo.RepoImp
 import com.example.domain.entity.RegisterRequest
 import com.example.domain.usecase.SignUpUseCase
@@ -65,8 +64,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     private fun getSignUpUseCase(): SignUpUseCase {
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val dataSource= apiService?.let { DataSourceImp(it) }
-        val repository = RepoImp(dataSource)
+        val repository = RepoImp(apiService)
         return SignUpUseCase(repository)
     }
 

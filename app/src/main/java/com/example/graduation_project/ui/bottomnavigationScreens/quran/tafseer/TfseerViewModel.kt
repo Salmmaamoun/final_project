@@ -18,32 +18,39 @@ import java.util.Locale.filter
 
 class TfseerViewModel(app: Application) : AndroidViewModel(app) {
     private val tfseerPage = TfseerProvider()
-    val tfseerLiveData = MutableLiveData<List<Tfseer>>()
-    var tfseerList = ArrayList<Tfseer>()
-    val tfseerDao = QuranDatabase.getInstance(getApplication())?.tfseerDao()
-    val dataLoaded = MutableLiveData<Boolean>()
+    val tfseerLiveData = MutableLiveData<Tfseer>()
+    val tfseerStateFlow = MutableStateFlow<Tfseer>(Tfseer())
+    var tfseerCallback : ((Tfseer) -> Unit) ={}
+    var startWork: ((Boolean) -> Unit) ={}
+    var arryListTfseer = ArrayList<Tfseer>()
+    var startWorkToGetTfseer = false
+    val TfseerDao = QuranDatabase.getInstance(getApplication())?.tfseerDao()
+
 
     init {
         getAllTfseer()
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun getAllTfseer() {
         viewModelScope.launch(Dispatchers.IO) {
-            tfseerList = tfseerPage.getAllTfasser(getApplication())!!
-            withContext(Dispatchers.Main) {
-                tfseerLiveData.value = tfseerList
-                dataLoaded.value = true // Indicate data is loaded
-            }
+            arryListTfseer = tfseerPage.getAllTfasser(getApplication())!!
+                startWork (true)
+
+
+
         }
     }
 
-    fun getTfseerByPage(soraNumber: String, ayaNumber: String): Tfseer? {
-        return tfseerList
-            .filter { it.number == soraNumber }
-            .filter { it.aya == ayaNumber }
-            .firstOrNull()
+     fun getTfseerByPage(soraNumber: String, ayaNumber: String) {
+             tfseerCallback(arryListTfseer
+                 ?.filter { tfseer: Tfseer -> soraNumber == tfseer.number }
+                 ?.filter { tfseer: Tfseer -> ayaNumber == tfseer.aya }
+             !![0])
     }
 
     fun getTfseerAyaByPage(pageNumber: Int) =
-        tfseerDao?.getPageAyatByNumber(pageNumber)
+        TfseerDao!!.getPageAyatByNumber(pageNumber)
+
+
 }

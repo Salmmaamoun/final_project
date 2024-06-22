@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.remote.LoginRegiisterRetrofitInstance
-import com.example.data.repo.datasource.DataSourceImp
 import com.example.data.repo.repo.RepoImp
 import com.example.domain.usecase.LoginUseCase
 import com.example.graduation_project.R
@@ -36,8 +35,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private fun getLoginUseCase(): LoginUseCase {
         // Implement your SignUpUseCase initialization here
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val dataSource= apiService?.let { DataSourceImp(it) }
-        val repository = RepoImp(dataSource)
+        val repository = RepoImp(apiService)
 
         return LoginUseCase(repository)
     }
