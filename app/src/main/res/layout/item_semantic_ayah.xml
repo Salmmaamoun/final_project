@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="ayah"
+            type="com.example.domain.entity.AyahsItem" />
+        <variable
+            name="name"
+            type="com.example.domain.entity.LexicalResponseItem" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_4sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/_5sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Ayah Text -->
+            <TextView
+                android:id="@+id/surahId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{ name.nameAr}"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/primrycolor"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:padding="@dimen/_6sdp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="start"
+                tools:text="Surah: 1" />
+
+            <TextView
+                android:id="@+id/aya"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{ayah.text }"
+                android:textSize="@dimen/_16sdp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:padding="@dimen/_6sdp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/surahId"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="This is an example Ayah text" />
+            <TextView
+                android:id="@+id/ayanum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{ayah.numberInSurah != null ? "رقم الاية: " + ayah.numberInSurah : "ايه رقم غير متوفر"}'
+                android:textSize="@dimen/_10sdp"
+                android:gravity="center"
+                android:padding="@dimen/_6sdp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/aya"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:text="This is an example Ayah text" />
+
+            <Button
+                android:id="@+id/highligthbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ayanum"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Highligth"
+
+            />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
