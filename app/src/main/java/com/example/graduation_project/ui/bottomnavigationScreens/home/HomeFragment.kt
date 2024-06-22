@@ -38,11 +38,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.lexicalBtn.setOnClickListener {
             navigateToLexicalSearchFragment(LexicalSearchFragment())
 
+        }
 
-            binding.semanticBtn.setOnClickListener {
-                navigateToLexicalSearchFragment(SeimanticFragment())
-            }
-        }}
+        binding.semanticBtn.setOnClickListener {
+            navigateToLexicalSearchFragment(SeimanticFragment())
+        }
+    }
 
     private fun navigateToLexicalSearchFragment(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
