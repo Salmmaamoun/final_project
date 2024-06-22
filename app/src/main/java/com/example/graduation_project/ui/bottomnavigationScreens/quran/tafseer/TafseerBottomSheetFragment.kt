@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 class TafseerBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetBinding
+
     private lateinit var viewModel: TfseerViewModel
     private lateinit var adapter: TfseerAdapter
     private var pageNumber: Int = 0
@@ -31,40 +32,47 @@ class TafseerBottomSheetFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.bottom_sheet,
             container,
             false
         )
+
+        viewModel = ViewModelProvider(requireActivity()).get(TfseerViewModel::class.java)
+        Log.d("test", "ViewModel initialized")
+
         val args = arguments
         pageNumber = args?.getInt("pageNumber", 0) ?: 0
         Log.d("test", "Page number: $pageNumber")
+
+        // Fetch data and update the adapter
+        observeDataLoading()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(TfseerViewModel::class.java)
-        Log.d("test", "onViewCreated: ViewModel initialized")
-
         setUpRv()
-        tfseerList.clear()
-        ayaList.clear()
-        getPageDataFromDB()
+    }
+
+    private fun observeDataLoading() {
+        viewModel.dataLoaded.observe(viewLifecycleOwner) { isLoaded ->
+            if (isLoaded) {
+                getPageDataFromDB()
+            }
+        }
     }
 
     private fun getPageDataFromDB() {
         viewModel.getTfseerAyaByPage(pageNumber)?.observe(viewLifecycleOwner) { ayaList ->
+            this.ayaList.clear()
             this.ayaList.addAll(ayaList)
             Log.d("test", "Received ayaList: $ayaList")
 
-            // Update the adapter immediately after fetching the ayaList
-            adapter.updateData(tfseerList, ayaList)
-            Log.d("test", "Adapter data updated with tfseerList: $tfseerList and ayaList: $ayaList")
-
-            // Call getTfseerAya directly
+            // Fetch tfseer immediately
             viewLifecycleOwner.lifecycleScope.launch {
                 getTfseerAya(ayaList)
             }
@@ -73,27 +81,21 @@ class TafseerBottomSheetFragment : BottomSheetDialogFragment() {
 
     private suspend fun getTfseerAya(ayaList: List<Aya>) {
         withContext(Dispatchers.Main) {
-            val fetchedTfseerList = mutableListOf<Tfseer>()
+            tfseerList.clear()
             ayaList.forEach { aya ->
                 val tfseer = viewModel.getTfseerByPage(aya.sora.toString(), aya.aya_no.toString())
-                Log.d("test", "Fetching Tfseer for Sora: ${aya.sora}, Aya: ${aya.aya_no}")
-                tfseer?.let { fetchedTfseerList.add(it) }
+                if (tfseer != null) {
+                    tfseerList.add(tfseer)
+                }
             }
-
-            // Update the tfseerList and ayaList
-            tfseerList.clear()
-            tfseerList.addAll(fetchedTfseerList)
-            this@TafseerBottomSheetFragment.ayaList.clear()
-            this@TafseerBottomSheetFragment.ayaList.addAll(ayaList)
-
-            // Update the adapter with the new data
-            adapter.updateData(tfseerList, this@TafseerBottomSheetFragment.ayaList)
+            adapter.updateData(tfseerList, ayaList)
             Log.d("test", "Adapter data updated with tfseerList: $tfseerList and ayaList: $ayaList")
         }
     }
 
     private fun setUpRv() {
         adapter = TfseerAdapter()
+        adapter.updateData(emptyList(), emptyList())
         binding.Tfseerrv.adapter = adapter
         Log.d("test", "RecyclerView set up with adapter")
     }

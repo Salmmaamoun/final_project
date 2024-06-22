@@ -18,52 +18,32 @@ import java.util.Locale.filter
 
 class TfseerViewModel(app: Application) : AndroidViewModel(app) {
     private val tfseerPage = TfseerProvider()
-    val tfseerLiveData = MutableLiveData<Tfseer>()
-    val tfseerStateFlow = MutableStateFlow<Tfseer>(Tfseer())
-    var tfseerCallback: ((Tfseer) -> Unit)? = null
-    var startWork: ((Boolean) -> Unit) = {}
+    val tfseerLiveData = MutableLiveData<List<Tfseer>>()
     var tfseerList = ArrayList<Tfseer>()
-    var startWorkToGetTfseer = false
-    val TfseerDao = QuranDatabase.getInstance(getApplication())?.tfseerDao()
+    val tfseerDao = QuranDatabase.getInstance(getApplication())?.tfseerDao()
+    val dataLoaded = MutableLiveData<Boolean>()
 
     init {
         getAllTfseer()
     }
 
-    @SuppressLint("SuspiciousIndentation")
     private fun getAllTfseer() {
         viewModelScope.launch(Dispatchers.IO) {
             tfseerList = tfseerPage.getAllTfasser(getApplication())!!
-            startWork(true)
-        }
-    }
-
-    suspend fun getTfseerByPage(soraNumber: String, ayaNumber: String): Tfseer? {
-        return withContext(Dispatchers. IO) {
-            if (tfseerList.isNotEmpty()) {
-                try {
-                    Log.d("getTfseerByPage", "Retrieving Tafseer for Sura $soraNumber, Aya $ayaNumber")
-                    tfseerList
-                        .filter { tfseer: Tfseer -> soraNumber == tfseer.number }
-                        .filter { tfseer: Tfseer -> ayaNumber == tfseer.aya }
-                        .firstOrNull()?.also {
-                            Log.d("getTfseerByPage", "Tfseer number: ${it.aya},Tfseer Aya: ${it.text}")
-                            withContext(Dispatchers.Main) {
-                                tfseerCallback?.invoke(it)
-                            }
-
-                        }
-                } catch (e: Exception) {
-                    Log.d("getTfseerByPage", "Error retrieving Tafseer for Sura $soraNumber, Aya $ayaNumber: $e")
-                    println("Error retrieving Tafseer for Sura $soraNumber, Aya $ayaNumber: $e")
-                    null
-                }
-            } else {
-                null
+            withContext(Dispatchers.Main) {
+                tfseerLiveData.value = tfseerList
+                dataLoaded.value = true // Indicate data is loaded
             }
         }
     }
 
+    fun getTfseerByPage(soraNumber: String, ayaNumber: String): Tfseer? {
+        return tfseerList
+            .filter { it.number == soraNumber }
+            .filter { it.aya == ayaNumber }
+            .firstOrNull()
+    }
+
     fun getTfseerAyaByPage(pageNumber: Int) =
-        TfseerDao?.getPageAyatByNumber(pageNumber)
+        tfseerDao?.getPageAyatByNumber(pageNumber)
 }

@@ -93,7 +93,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_13sdp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/search_button_ar"
+            app:layout_constraintTop_toBottomOf="@id/search_button_en"
             app:layout_constraintBottom_toTopOf="@id/scorll"
             />
         <ScrollView
