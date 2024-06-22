@@ -28,23 +28,23 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_80sdp"
-            android:hint="Click here"
+            android:hint="ادخل اسم السورة.."
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/surah_name_ed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="surah name..."
+            android:hint="اسم السورة...."
             app:layout_constraintTop_toTopOf="@id/name_sura"
-            app:layout_constraintLeft_toRightOf="@id/name_sura"
+            app:layout_constraintRight_toLeftOf="@id/name_sura"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_margin="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="@id/name_sura"
             />
 
@@ -53,23 +53,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:hint="click here to Select the number of the aya"
+            android:hint="ادخل رقم الايه.."
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="@dimen/_16sdp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/name_sura" />
 
         <Button
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/search_button_ar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_7sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
             android:drawableEnd="@drawable/baseline_search_24"
-            android:text="@string/search_here"
+            android:text="@string/search_ar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/number_aya" />
+        <Button
+            android:id="@+id/search_button_en"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:drawableEnd="@drawable/baseline_search_24"
+            android:text="@string/search_en"
+            app:layout_constraintStart_toEndOf="@id/search_button_ar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_button_ar" />
+
+
+
         <TextView
             android:id="@+id/aya"
             android:layout_width="match_parent"
@@ -78,7 +93,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_13sdp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/search_button"
+            app:layout_constraintTop_toBottomOf="@id/search_button_ar"
             app:layout_constraintBottom_toTopOf="@id/scorll"
             />
         <ScrollView
@@ -86,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/aya">
 
@@ -98,9 +113,9 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
-                android:hint="result"
+                android:hint="التفسير:"
                 android:scrollbars="vertical"
-                 />
+                />
 
         </ScrollView>
 
