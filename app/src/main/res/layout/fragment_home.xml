@@ -7,48 +7,55 @@
 
         <import type="android.net.Uri" />
     </data>
-<FrameLayout
-    android:id="@+id/home_con"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/SCREEN"
+    <FrameLayout
+        android:id="@+id/home_con"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/_5sdp"
-        tools:context=".ui.bottomnavigationScreens.home.HomeFragment">
-<ImageView
-    android:id="@+id/logo"
-    android:layout_width="@dimen/_200sdp"
-    android:layout_height="@dimen/_270sdp"
-    android:src="@drawable/qur"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_margin="@dimen/_50sdp"
-    app:layout_constraintStart_toStartOf="parent"
-    />
-
-        <Button
-            android:id="@+id/lexical_btn"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/SCREEN"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="البحث باللفظ ف القران"
-            android:layout_marginTop="@dimen/_30sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logo" />
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5sdp"
+            tools:context=".ui.bottomnavigationScreens.home.HomeFragment">
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_270sdp"
+                android:src="@drawable/qur"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="@dimen/_50sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
-        <Button
-            android:id="@+id/semantic_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="البحث بالمعنى فى القران"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lexical_btn" />
+            <Button
+                android:id="@+id/lexical_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="البحث باللفظ ف القران"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+
+                android:drawableEnd="@drawable/baseline_search_24"
+                android:hint="Search here......"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo" />
+
+            <Button
+                android:id="@+id/semantic_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:drawableEnd="@drawable/baseline_search_24"
+                android:text="البحث بالمعنى فى القران"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lexical_btn" />
 
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

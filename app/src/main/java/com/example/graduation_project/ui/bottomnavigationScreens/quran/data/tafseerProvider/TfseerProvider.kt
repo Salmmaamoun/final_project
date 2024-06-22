@@ -20,8 +20,8 @@ class TfseerProvider() {
             val tfserString = String(bytes, StandardCharsets.UTF_8)
             val gson = Gson()
             val tfseerList: ArrayList<Tfseer>? = gson.fromJson(tfserString, object : TypeToken<ArrayList<Tfseer>>() {}.type)
-            Log.d("TfseerProvider", tfseerList?.size.toString())
-            Log.d("TfseerProvider", tfseerList.toString())
+            Log.d("TfseerProvider",tfseerList?.size.toString())
+            Log.d("TfseerProvider",tfseerList.toString())
             tfseerList
         } catch (e: IOException) {
             e.printStackTrace()
@@ -29,4 +29,3 @@ class TfseerProvider() {
         }
     }
 }
-

@@ -17,14 +17,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 class TafseerBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetBinding
-    private val viewModel: TfseerViewModel by lazy {
-        ViewModelProvider(requireActivity()).get(TfseerViewModel::class.java)
-    }
+    private lateinit var viewModel: TfseerViewModel
     private lateinit var adapter: TfseerAdapter
     private var pageNumber: Int = 0
     private val ayaList = mutableListOf<Aya>()
@@ -34,7 +31,7 @@ class TafseerBottomSheetFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.bottom_sheet,
@@ -44,33 +41,30 @@ class TafseerBottomSheetFragment : BottomSheetDialogFragment() {
         val args = arguments
         pageNumber = args?.getInt("pageNumber", 0) ?: 0
         Log.d("test", "Page number: $pageNumber")
-
-        // Fetch data and update the adapter
-        observeDataLoading()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpRv()
-    }
+        viewModel = ViewModelProvider(requireActivity()).get(TfseerViewModel::class.java)
+        Log.d("test", "onViewCreated: ViewModel initialized")
 
-    private fun observeDataLoading() {
-        viewModel.dataLoaded.observe(viewLifecycleOwner) { isLoaded ->
-            if (isLoaded) {
-                getPageDataFromDB()
-            }
-        }
+        setUpRv()
+        tfseerList.clear()
+        ayaList.clear()
+        getPageDataFromDB()
     }
 
     private fun getPageDataFromDB() {
         viewModel.getTfseerAyaByPage(pageNumber)?.observe(viewLifecycleOwner) { ayaList ->
-            this.ayaList.clear()
             this.ayaList.addAll(ayaList)
             Log.d("test", "Received ayaList: $ayaList")
 
-            // Fetch tfseer immediately
+            // Update the adapter immediately after fetching the ayaList
+            adapter.updateData(tfseerList, ayaList)
+            Log.d("test", "Adapter data updated with tfseerList: $tfseerList and ayaList: $ayaList")
+
+            // Call getTfseerAya directly
             viewLifecycleOwner.lifecycleScope.launch {
                 getTfseerAya(ayaList)
             }
@@ -79,14 +73,21 @@ class TafseerBottomSheetFragment : BottomSheetDialogFragment() {
 
     private suspend fun getTfseerAya(ayaList: List<Aya>) {
         withContext(Dispatchers.Main) {
-            tfseerList.clear()
+            val fetchedTfseerList = mutableListOf<Tfseer>()
             ayaList.forEach { aya ->
                 val tfseer = viewModel.getTfseerByPage(aya.sora.toString(), aya.aya_no.toString())
-                if (tfseer != null) {
-                    tfseerList.add(tfseer)
-                }
+                Log.d("test", "Fetching Tfseer for Sora: ${aya.sora}, Aya: ${aya.aya_no}")
+                tfseer?.let { fetchedTfseerList.add(it) }
             }
-            adapter.updateData(tfseerList, ayaList)
+
+            // Update the tfseerList and ayaList
+            tfseerList.clear()
+            tfseerList.addAll(fetchedTfseerList)
+            this@TafseerBottomSheetFragment.ayaList.clear()
+            this@TafseerBottomSheetFragment.ayaList.addAll(ayaList)
+
+            // Update the adapter with the new data
+            adapter.updateData(tfseerList, this@TafseerBottomSheetFragment.ayaList)
             Log.d("test", "Adapter data updated with tfseerList: $tfseerList and ayaList: $ayaList")
         }
     }
@@ -97,4 +98,3 @@ class TafseerBottomSheetFragment : BottomSheetDialogFragment() {
         Log.d("test", "RecyclerView set up with adapter")
     }
 }
-

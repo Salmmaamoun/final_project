@@ -12,6 +12,7 @@ import com.example.graduation_project.databinding.ItemTafseerBinding
 import com.example.graduation_project.databinding.ListItemSoraBinding
 import com.example.graduation_project.ui.bottomnavigationScreens.quran.data.pojo.quran.Aya
 import com.example.graduation_project.ui.bottomnavigationScreens.quran.data.pojo.quran.Tfseer
+
 class TfseerAdapter : RecyclerView.Adapter<TfseerAdapter.TfseerViewHolder>() {
 
     private var tfseerList: List<Tfseer> = emptyList()
