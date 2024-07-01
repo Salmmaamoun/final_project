@@ -20,23 +20,21 @@
             app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-          />
+            />
 
 
-        <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="false"
-            app:mbn_backgroundBottomColor="#E4E4E4"
-            app:mbn_circleColor="#FFFFFF"
-            app:mbn_countBackgroundColor="#FF0000"
-            app:mbn_countTextColor="#E4E4E4"
-            app:mbn_defaultIconColor="#90A4AE"
-            app:mbn_rippleColor="#90A4AE"
-            app:mbn_selectedIconColor="@color/primrycolor"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/menu"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:itemIconTint="@drawable/btn_nav_item_selected_color"
+            app:backgroundTint="@color/primrycolor"
             />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

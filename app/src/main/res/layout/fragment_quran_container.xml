@@ -8,11 +8,22 @@
     </data>
 
     <FrameLayout
+        android:id="@+id/con"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/fragQuranContainer_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_margin="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabGravity="fill" />
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/quran_pager"
                 android:layout_width="match_parent"

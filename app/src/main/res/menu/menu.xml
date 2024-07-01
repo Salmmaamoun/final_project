@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_quran"
+        android:icon="@drawable/quran"
+        android:title="قران" />
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/hom"
+        android:title="البحث فى القران" />
+    <item
+        android:id="@+id/navigation_qura"
+        android:icon="@drawable/qura"
+        android:title="التفسير" />
+</menu>

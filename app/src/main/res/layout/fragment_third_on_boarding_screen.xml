@@ -7,7 +7,6 @@
 
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +30,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="@id/imgOnboard"
             app:layout_constraintLeft_toLeftOf="@id/imgOnboard"
-            android:text="Eadicate your Islamic illiteracy"
+            android:text="امحِ اميتك الإسلامية"
             android:textAlignment="center"
             android:textSize="24sp"
             android:gravity="center"

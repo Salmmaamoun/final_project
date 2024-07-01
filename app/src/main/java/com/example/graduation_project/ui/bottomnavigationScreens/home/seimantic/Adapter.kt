@@ -21,6 +21,7 @@ import com.example.data.repo.repo.RepoImp
 import com.example.domain.entity.AyaData
 import com.example.domain.entity.SemanticApiResponse
 import com.example.domain.usecase.SearchSemanticUseCase
+import com.example.graduation_project.R
 import com.example.graduation_project.databinding.ItemSemanticAyahBinding
 class Adapter(val onHighligthListener: (AyaData, Int) -> Unit) : ListAdapter<AyaData, Adapter.ViewHolder>(DiffUtil()) {
 
@@ -28,7 +29,6 @@ class Adapter(val onHighligthListener: (AyaData, Int) -> Unit) : ListAdapter<Aya
 
     inner class ViewHolder(private val binding: ItemSemanticAyahBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         @SuppressLint("SetTextI18n")
         fun bind(item: AyaData, position: Int) {
             binding.apply {
@@ -44,7 +44,7 @@ class Adapter(val onHighligthListener: (AyaData, Int) -> Unit) : ListAdapter<Aya
                     if (originalText != null) {
                         if (start in 0 until originalText.length && end in 0..originalText.length && start < end) {
                             val spannableString = SpannableString(originalText)
-                            val colorSpan = ForegroundColorSpan(Color.YELLOW) // Highlight color
+                            val colorSpan = ForegroundColorSpan(Color.GRAY) // Highlight color
                             spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                             binding.aya.text = spannableString
                         } else {

@@ -32,9 +32,9 @@ class OnBoardingScreenActivity() : BaseActivity<ActivityOnBoardingScreenBinding>
         super.onCreate(savedInstanceState)
 
         var onboardingScreens = listOf(
-            ThirdOnBoardingScreenFragment(),
+            FirstOnBoardingScreenFragment(),
             SecondOnBoardingScreenFragment(),
-            FirstOnBoardingScreenFragment()
+            ThirdOnBoardingScreenFragment()
         )
 
         onboardingAdapter = OnBoardingAdapter(supportFragmentManager,lifecycle ,onboardingScreens = onboardingScreens ,)
@@ -53,32 +53,28 @@ class OnBoardingScreenActivity() : BaseActivity<ActivityOnBoardingScreenBinding>
         }
 
         //Implement skip button
-       binding.btnSkip.setOnClickListener {
-           val intent= Intent(it.context,MainActivity::class.java)
+        binding.btnSkip.setOnClickListener {
+            val intent= Intent(it.context,MainActivity::class.java)
             startActivity(intent)
         }
 
         // Implement next button
         binding.btnNext.setOnClickListener {
-           if (binding.vpOnboarding.currentItem == onboardingScreens.size - 1) {
-            val intent= Intent(it.context,MainActivity::class.java)
+            if (binding.vpOnboarding.currentItem == onboardingScreens.size - 1) {
+                val intent= Intent(it.context,MainActivity::class.java)
                 startActivity(intent)
             } else {
                 binding.vpOnboarding.currentItem = binding.vpOnboarding.currentItem + 1
             }
         }
-
-
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(layoutActivityId)
     }
-
     override fun describeContents(): Int {
         return 0
     }
-
     companion object CREATOR : Parcelable.Creator<OnBoardingScreenActivity> {
         override fun createFromParcel(parcel: Parcel): OnBoardingScreenActivity {
             return OnBoardingScreenActivity(parcel)
@@ -88,8 +84,4 @@ class OnBoardingScreenActivity() : BaseActivity<ActivityOnBoardingScreenBinding>
             return arrayOfNulls(size)
         }
     }
-
-
-
-
 }

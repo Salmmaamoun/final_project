@@ -11,6 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            />
 
         <!-- TODO: Update blank fragment layout -->
         <ImageView
@@ -18,12 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/arrow"
             android:src="@drawable/backgroun"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
