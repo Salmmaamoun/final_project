@@ -10,6 +10,8 @@ import com.example.graduation_project.databinding.ActivityMainBinding
 import com.example.graduation_project.ui.bottomnavigationScreens.home.HomeFragment
 import com.example.graduation_project.ui.bottomnavigationScreens.quran.SoraListFragment
 import com.example.graduation_project.ui.bottomnavigationScreens.Tafseer.TafseerFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.quran.ContainerFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.quran.JuzzFragment
 import com.example.weather_app.ui.base.BaseActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -20,27 +22,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         val req=LoginRequest("ss","sss")
 
-        val fragments = listOf(
-            SoraListFragment(),
-            HomeFragment(),
-            TafseerFragment()
-        )
 
-        binding.bottomNavigation.apply {
-            add(MeowBottomNavigation.Model(1, R.drawable.quran))
-            add(MeowBottomNavigation.Model(2, R.drawable.hom))
-            add(MeowBottomNavigation.Model(3, R.drawable.qura))
 
-            replaceFragment(HomeFragment())
-            setOnClickMenuListener {
-                val fragment = fragments[it.id - 1]
-                replaceFragment(fragment)
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_quran -> {
+                    replaceFragment(ContainerFragment())
+                    true
+                }
+                R.id.navigation_home -> {
+                    replaceFragment(HomeFragment())
+                    true
+                }
+                R.id.navigation_qura -> {
+                    replaceFragment(TafseerFragment())
+                    true
+                }
+                else -> false
             }
-
-            show(2)
         }
-    }
 
+// Set default selected item
+        binding.bottomNavigation.selectedItemId = R.id.navigation_home
+
+}
     private fun replaceFragment(fragment:Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frame_container, fragment)

@@ -26,7 +26,6 @@ class LexicalResponseAdapter(private var items: List<LexicalResponseItem?>) :
         fun bind(item: LexicalResponseItem?) {
             binding.ayah = item?.ayahs?.firstOrNull()
             binding.name=item
-
             binding.executePendingBindings()
         }
     }

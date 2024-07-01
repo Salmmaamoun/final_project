@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Graduation_project</string>
-    <string name="nextbtn">next</string>
-    <string name="skipbtn">skip</string>
-    <string name="to">to_page:</string>
-    <string name="from_page">from_page:</string>
+    <string name="app_name">بَـيِّـنَـات</string>
+    <string name="nextbtn">التالى</string>
+    <string name="skipbtn">تخطى</string>
+    <string name="to">من صفحة:</string>
+    <string name="from_page">الى صفحة:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_here">search here..</string>

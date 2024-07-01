@@ -6,6 +6,7 @@ data class LexicalResponse(
 	val lexicalResponse: List<LexicalResponseItem>
 )
 
+
 data class AyahsItem(
 
 	@field:SerializedName("juz_id")

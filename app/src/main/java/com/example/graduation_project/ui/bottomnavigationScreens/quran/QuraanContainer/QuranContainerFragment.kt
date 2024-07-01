@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.FragmentQuranContainerBinding
 import com.example.graduation_project.ui.base.BaseFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.quran.ContainerFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.quran.SoraListFragment
 import com.example.graduation_project.ui.bottomnavigationScreens.quran.tafseer.TafseerBottomSheetFragment
 import com.example.graduation_project.ui.bottomnavigationScreens.quran.tafseer.TfseerAdapter
 
@@ -47,6 +50,9 @@ class QuranContainerFragment : BaseFragment<FragmentQuranContainerBinding>() {
             }
         })
 
+
+
+
         binding.btnTfseer.setOnClickListener {
             showTafseerBottomSheet()
         }
@@ -61,5 +67,10 @@ class QuranContainerFragment : BaseFragment<FragmentQuranContainerBinding>() {
         bottomSheet.show(parentFragmentManager, bottomSheet.tag)
 
 
+    }
+    fun navigateToSoraList() {
+       parentFragmentManager.beginTransaction().
+       replace(R.id.frame_container, ContainerFragment())
+            .commit()
     }
 }

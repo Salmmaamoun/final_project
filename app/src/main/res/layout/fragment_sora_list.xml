@@ -13,15 +13,30 @@
         android:padding="@dimen/_10sdp"
         style="@style/SCREEN"
         android:id="@+id/con">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:id="@+id/icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@mipmap/icon"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:orientation="vertical"
             tools:listitem="@layout/list_item_sora"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:id="@+id/sora_list"
-            android:layout_marginTop="@dimen/_35sdp"
+            app:layout_constraintTop_toBottomOf="@id/icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </FrameLayout>

@@ -46,6 +46,7 @@ interface ApiService {
     ):TafseerResponse
 
     @GET("search")
-    suspend fun getSearchLexical(@Query("term") term: String):List<LexicalResponseItem>
+    suspend fun getSearchLexical(@Query("term") term: String): List<LexicalResponseItem>
+
 
 }

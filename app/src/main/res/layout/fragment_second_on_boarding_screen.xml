@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="@id/imgOnboard"
             app:layout_constraintLeft_toLeftOf="@id/imgOnboard"
-            android:text="Trust Allah and understand the Holy Quran"
+            android:text="توكل على الله و تدبر القران"
         android:gravity="center"
             android:textSize="24sp"
             android:textStyle="bold"

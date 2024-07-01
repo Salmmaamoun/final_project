@@ -11,7 +11,7 @@
     <!-- light mode-->
     <!--screen light-->
     <style name="SCREEN">
-        <item name="android:background">@drawable/backgroun</item>
+        <item name="android:background">@color/gray</item>
     </style>
     <!--text background-->
     <style name="Text">

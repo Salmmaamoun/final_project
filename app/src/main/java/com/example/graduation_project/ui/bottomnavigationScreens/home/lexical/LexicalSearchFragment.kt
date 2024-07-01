@@ -12,7 +12,10 @@ import com.example.data.remote.LoginRegiisterRetrofitInstance
 import com.example.data.repo.datasource.DataSourceImp
 import com.example.data.repo.repo.RepoImp
 import com.example.domain.usecase.SearchLexicalUseCase
+import com.example.graduation_project.R
 import com.example.graduation_project.databinding.FragmentLexicalSearchBinding
+import com.example.graduation_project.ui.bottomnavigationScreens.home.HomeFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.quran.SoraListFragment
 
 
 class LexicalSearchFragment : Fragment() {
@@ -66,6 +69,9 @@ class LexicalSearchFragment : Fragment() {
             val query = binding.searchAya.query.toString()
             lexicalViewModel.searchLexical(query)
         }
+        binding.arrow.setOnClickListener {
+            navigateToHome()
+        }
     }
     private fun showLoadingState() {
         // Disable buttons
@@ -82,5 +88,10 @@ class LexicalSearchFragment : Fragment() {
         binding.btnSearch.isEnabled = true
         binding.recLexical.isEnabled = true
         binding.loadingIndicator.visibility = View.GONE
+    }
+    fun navigateToHome() {
+        parentFragmentManager.beginTransaction().
+        replace(R.id.frame_container, HomeFragment())
+            .commit()
     }
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.graduation_project.R
 import com.example.graduation_project.databinding.FragmentPageQuraanBinding
 import com.example.graduation_project.ui.base.BaseFragment
+import com.example.graduation_project.ui.bottomnavigationScreens.quran.ContainerFragment
 import com.example.graduation_project.ui.bottomnavigationScreens.quran.tafseer.TafseerBottomSheetFragment
 
 
@@ -40,6 +41,9 @@ class QuraanPageFragment :BaseFragment<FragmentPageQuraanBinding>{
         super.onViewCreated(view, savedInstanceState)
         quranViewModel = ViewModelProvider(this).get(QuranViewModel::class.java)
 
+        binding.arrow.setOnClickListener {
+            navigateToSoraList()
+        }
         val quranPageBitmap = quranViewModel.getQuranImageByPageNumber(requireContext(), pageNumber)
         if (quranPageBitmap != null) {
             binding.quranPage.setImageBitmap(quranPageBitmap)
@@ -49,6 +53,12 @@ class QuraanPageFragment :BaseFragment<FragmentPageQuraanBinding>{
         }
 
     }
+    fun navigateToSoraList() {
+        parentFragmentManager.beginTransaction().
+        replace(R.id.con, ContainerFragment())
+            .commit()
+    }
+
 
 
 }

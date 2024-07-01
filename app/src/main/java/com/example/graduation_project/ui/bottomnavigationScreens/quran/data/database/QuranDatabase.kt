@@ -15,6 +15,7 @@ import com.example.graduation_project.ui.bottomnavigationScreens.quran.data.pojo
         abstract fun quranDao(): QuranDao
         abstract fun tfseerDao(): TfseerDao
 
+
         companion object {
             @Volatile
             private var instance: QuranDatabase? = null

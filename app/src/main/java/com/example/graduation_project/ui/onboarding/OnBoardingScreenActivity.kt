@@ -32,9 +32,9 @@ class OnBoardingScreenActivity() : BaseActivity<ActivityOnBoardingScreenBinding>
         super.onCreate(savedInstanceState)
 
         var onboardingScreens = listOf(
-            ThirdOnBoardingScreenFragment(),
+            FirstOnBoardingScreenFragment(),
             SecondOnBoardingScreenFragment(),
-            FirstOnBoardingScreenFragment()
+            ThirdOnBoardingScreenFragment()
         )
 
         onboardingAdapter = OnBoardingAdapter(supportFragmentManager,lifecycle ,onboardingScreens = onboardingScreens ,)

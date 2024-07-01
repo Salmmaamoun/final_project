@@ -27,11 +27,13 @@ object LoginRegiisterRetrofitInstance {
         .protocols(listOf(Protocol.HTTP_1_1))
         .addInterceptor(loggingInterceptor)
         .addInterceptor(tokenInterceptor)
-          // Increase write timeout
+        .connectTimeout(30, TimeUnit.SECONDS)  // Increase connection timeout
+        .readTimeout(30, TimeUnit.SECONDS)     // Increase read timeout
+        .writeTimeout(30, TimeUnit.SECONDS)    // Increase write timeout
         .build()
 
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://shubramasrshops.000webhostapp.com/api/v1/")
+        .baseUrl("https://skyblue-scorpion-935834.hostingersite.com/public/api/v1/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
