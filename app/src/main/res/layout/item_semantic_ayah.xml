@@ -80,7 +80,8 @@
                 app:layout_constraintTop_toBottomOf="@id/ayanum"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="Highligth"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="تحديد المعنى في الآية"
 
             />
         </androidx.constraintlayout.widget.ConstraintLayout>

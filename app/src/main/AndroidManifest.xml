@@ -13,7 +13,6 @@
         android:required="true"
         android:requiredFeature="true"/>
     <application
-
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,7 +21,6 @@
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-
         android:theme="@style/Theme.Graduation_project"
         tools:targetApi="31">
         <provider
@@ -56,18 +54,19 @@
         </activity>
         <activity
             android:name=".ui.splach.SplachScreenActivity"
-            android:exported="false">
-
-
-        </activity>
-        <activity
-            android:name=".ui.onboarding.OnBoardingScreenActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+        </activity>
+        <activity
+            android:name=".ui.onboarding.OnBoardingScreenActivity"
+            android:exported="false" >
+
         </activity>
     </application>
 

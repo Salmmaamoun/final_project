@@ -44,7 +44,7 @@ class Adapter(val onHighligthListener: (AyaData, Int) -> Unit) : ListAdapter<Aya
                     if (originalText != null) {
                         if (start in 0 until originalText.length && end in 0..originalText.length && start < end) {
                             val spannableString = SpannableString(originalText)
-                            val colorSpan = ForegroundColorSpan(Color.GRAY) // Highlight color
+                            val colorSpan = ForegroundColorSpan(Color.RED) // Highlight color
                             spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                             binding.aya.text = spannableString
                         } else {
@@ -53,8 +53,8 @@ class Adapter(val onHighligthListener: (AyaData, Int) -> Unit) : ListAdapter<Aya
                     }
                 } else {
                     binding.aya.text = item.verse
-                    binding.surahId.text = item.surah
-                    binding.ayanum.text = item.numberInSurah.toString()
+                    binding.surahId.text = "سورة : "+item.surah
+                    binding.ayanum.text = " رقم الآية : "+item.numberInSurah.toString()
                 }
 
                 binding.highligthbtn.setOnClickListener {
