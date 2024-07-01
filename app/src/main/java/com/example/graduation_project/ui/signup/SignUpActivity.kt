@@ -63,7 +63,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     private fun getSignUpUseCase(): SignUpUseCase {
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val dataSource = apiService?.let { DataSourceImp(it) }
+        val aiApiService = LoginRegiisterRetrofitInstance.getAiApi()
+        val apiSemanticService=LoginRegiisterRetrofitInstance.getApiSemSearch()
+        val aiHighlightService=LoginRegiisterRetrofitInstance.getAiApiHighligth()
+        val dataSource = apiService?.let { DataSourceImp(it ,aiApiService ,apiSemanticService , aiHighlightService)  }
+
         val repository = RepoImp(dataSource)
         return SignUpUseCase(repository)
     }

@@ -4,11 +4,15 @@ import com.example.data.remote.ApiService
 import com.example.data.repo.datasource.DataSourceImp
 import com.example.domain.abstraction.DataSourceRepo.DataSourceRepo
 import com.example.domain.abstraction.Repo.Repo
+import com.example.domain.entity.AyaData
+import com.example.domain.entity.HighlightResponce
 import com.example.domain.entity.LexicalResponseItem
 import com.example.domain.entity.LoginRequest
 import com.example.domain.entity.RegisterRequest
 import com.example.domain.entity.LoginResponse
 import com.example.domain.entity.RegisterResponse
+import com.example.domain.entity.SemanticAiResponce
+import com.example.domain.entity.SemanticApiResponse
 import com.example.domain.entity.SurahResponse
 import com.example.domain.entity.TafseerResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -54,4 +58,18 @@ class RepoImp(val dataSource: DataSourceRepo?):Repo {
     override suspend fun getSearchLexical(term: String): List<LexicalResponseItem> {
         return (dataSource?.getSearchLexical(term) ?: null) as List<LexicalResponseItem>
     }
+
+    override suspend fun getSemanticsearch(term: String): SemanticAiResponce {
+       return dataSource?.getSemanticsearch(query = term) ?: SemanticAiResponce()
+    }
+
+    override suspend fun getSmanticAyaSearch(query: Int): AyaData {
+        return dataSource?.getSmanticAyaSearch(query) ?:AyaData()
+    }
+
+    override suspend fun getHighligthData(question: String , context :String): HighlightResponce {
+        return dataSource?.getHighligthData(question, context) ?: HighlightResponce()
+    }
+
+
 }

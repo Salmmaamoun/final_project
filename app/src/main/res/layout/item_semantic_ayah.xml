@@ -5,11 +5,17 @@
     <data>
         <variable
             name="ayah"
-            type="com.example.domain.entity.AyahsItem" />
+            type="com.example.domain.entity.AyaData" />
         <variable
             name="name"
-            type="com.example.domain.entity.LexicalResponseItem" />
+            type="com.example.domain.entity.AyaData" />
     </data>
+
+<!--    android:text="@{ name.nameAr}"-->
+<!--    android:text="@{ayah.text }"-->
+<!--    android:text='@{ayah.numberInSurah != null ? "رقم الاية: " + ayah.numberInSurah : "ايه رقم غير متوفر"}'-->
+
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +35,7 @@
                 android:id="@+id/surahId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{ name.nameAr}"
+                android:text="@{ ayah.surah}"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@color/primrycolor"
                 android:textColor="@color/black"
@@ -44,7 +50,7 @@
                 android:id="@+id/aya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{ayah.text }"
+                android:text="@{ayah.verse }"
                 android:textSize="@dimen/_16sdp"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -53,6 +59,7 @@
                 app:layout_constraintTop_toBottomOf="@id/surahId"
                 app:layout_constraintRight_toRightOf="parent"
                 tools:text="This is an example Ayah text" />
+
             <TextView
                 android:id="@+id/ayanum"
                 android:layout_width="match_parent"

@@ -35,7 +35,11 @@ class SurahNameFragment : BaseFragment <FragmentSurahNameBinding>(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val dataSource = apiService?.let { DataSourceImp(it) }
+        val aiApiService = LoginRegiisterRetrofitInstance.getAiApi()
+        val apiSemanticService=LoginRegiisterRetrofitInstance.getApiSemSearch()
+        val aiHighlightService=LoginRegiisterRetrofitInstance.getAiApiHighligth()
+        val dataSource = apiService?.let { DataSourceImp(it ,aiApiService,apiSemanticService , aiHighlightService)  }
+
         val repository = RepoImp(dataSource)
         val useCase = SurahNameUseCase(repository)
         val viewModelFactory = ViewModelFactory(useCase)

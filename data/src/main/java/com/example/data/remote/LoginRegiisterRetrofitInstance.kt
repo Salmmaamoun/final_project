@@ -27,16 +27,48 @@ object LoginRegiisterRetrofitInstance {
         .protocols(listOf(Protocol.HTTP_1_1))
         .addInterceptor(loggingInterceptor)
         .addInterceptor(tokenInterceptor)
-          // Increase write timeout
+        .connectTimeout(200, TimeUnit.SECONDS)  // Set connection timeout
+        .readTimeout(200, TimeUnit.SECONDS)     // Set read timeout
+        .writeTimeout(200, TimeUnit.SECONDS)    // Set write timeout
         .build()
 
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://shubramasrshops.000webhostapp.com/api/v1/")
+        .baseUrl("https://skyblue-scorpion-935834.hostingersite.com/public/api/v1/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
 
-    fun getApi(): ApiService? {
+    val retrofitForAi = Retrofit.Builder()
+        .baseUrl("https://quran-semantic-api.icycliff-d2b823f1.eastus.azurecontainerapps.io/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
+        .build()
+
+    val retrofitForSemanticApi = Retrofit.Builder()
+        .baseUrl("https://quranic-api.icycliff-d2b823f1.eastus.azurecontainerapps.io/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
+        .build()
+
+    val retrofitForAiHighligth = Retrofit.Builder()
+        .baseUrl("https://hugging-api--d7yhkmh.icycliff-d2b823f1.eastus.azurecontainerapps.io/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
+        .build()
+
+    fun getApi(): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    fun getAiApi(): AiService {
+        return retrofitForAi.create(AiService::class.java)
+    }
+
+    fun getApiSemSearch(): ApiSemanticService {
+        return retrofitForSemanticApi.create(ApiSemanticService::class.java)
+    }
+
+    fun getAiApiHighligth(): AiHighlightService {
+        return retrofitForAiHighligth.create(AiHighlightService::class.java)
     }
 }

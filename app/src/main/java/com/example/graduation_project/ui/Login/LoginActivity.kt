@@ -36,7 +36,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private fun getLoginUseCase(): LoginUseCase {
         // Implement your SignUpUseCase initialization here
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val dataSource = apiService?.let { DataSourceImp(it) }
+        val aiApiService = LoginRegiisterRetrofitInstance.getAiApi()
+        val apiSemanticService=LoginRegiisterRetrofitInstance.getApiSemSearch()
+        val aiHighlightService=LoginRegiisterRetrofitInstance.getAiApiHighligth()
+        val dataSource = apiService?.let { DataSourceImp(it ,aiApiService,apiSemanticService , aiHighlightService)  }
+
         val repository = RepoImp(dataSource)
 
 

@@ -29,7 +29,11 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.nameSura.text = "اختر اسم السورة".toString()
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val dataSource= apiService?.let { DataSourceImp(it) }
+        val aiApiService = LoginRegiisterRetrofitInstance.getAiApi()
+        val apiSemanticService=LoginRegiisterRetrofitInstance.getApiSemSearch()
+        val aiHighlightService=LoginRegiisterRetrofitInstance.getAiApiHighligth()
+        val dataSource = apiService?.let { DataSourceImp(it ,aiApiService,apiSemanticService , aiHighlightService)  }
+
         val repository = RepoImp(dataSource)
         val useCase = AyaUseCase(repository)
         val viewModelFactory = TaseerViewModelFactory(useCase)

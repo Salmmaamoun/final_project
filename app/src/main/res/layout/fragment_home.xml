@@ -18,29 +18,28 @@
             android:padding="@dimen/_5sdp"
             tools:context=".ui.bottomnavigationScreens.home.HomeFragment">
             <ImageView
-                android:id="@+id/logo"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_270sdp"
-                android:src="@drawable/qur"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/img"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="@dimen/_50sdp"
                 app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/icon"
+
                 />
+
 
             <Button
                 android:id="@+id/lexical_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="البحث باللفظ ف القران"
-                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_10sdp"
 
                 android:drawableEnd="@drawable/baseline_search_24"
                 android:hint="Search here......"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/logo" />
+                app:layout_constraintTop_toBottomOf="@id/img" />
 
             <Button
                 android:id="@+id/semantic_btn"

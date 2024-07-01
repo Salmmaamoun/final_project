@@ -12,7 +12,9 @@ import com.example.data.remote.LoginRegiisterRetrofitInstance
 import com.example.data.repo.datasource.DataSourceImp
 import com.example.data.repo.repo.RepoImp
 import com.example.domain.usecase.SearchLexicalUseCase
+import com.example.graduation_project.R
 import com.example.graduation_project.databinding.FragmentLexicalSearchBinding
+import com.example.graduation_project.ui.bottomnavigationScreens.home.HomeFragment
 
 
 class LexicalSearchFragment : Fragment() {
@@ -20,7 +22,10 @@ class LexicalSearchFragment : Fragment() {
     private lateinit var binding: FragmentLexicalSearchBinding
     private val lexicalViewModel: LexicalSearchViewModel by viewModels {
         val apiService = LoginRegiisterRetrofitInstance.getApi()
-        val dataSource = apiService?.let { DataSourceImp(it) }
+        val aiApiService = LoginRegiisterRetrofitInstance.getAiApi()
+        val apiSemanticService=LoginRegiisterRetrofitInstance.getApiSemSearch()
+        val aiHighlightService=LoginRegiisterRetrofitInstance.getAiApiHighligth()
+        val dataSource = apiService?.let { DataSourceImp(it ,aiApiService ,apiSemanticService , aiHighlightService)  }
         val repository = RepoImp(dataSource)
         val useCase = SearchLexicalUseCase(repository)
         SearchViewModelFactory(useCase)
@@ -42,6 +47,9 @@ class LexicalSearchFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.recLexical.adapter = adapter
+        binding.arrow.setOnClickListener {
+            navigateToHome()
+        }
 
         lexicalViewModel.lexicalResponse.observe(viewLifecycleOwner) { items ->
             items?.let {
@@ -83,4 +91,9 @@ class LexicalSearchFragment : Fragment() {
         binding.recLexical.isEnabled = true
         binding.loadingIndicator.visibility = View.GONE
     }
+
+    fun navigateToHome() {
+        parentFragmentManager.beginTransaction().
+        replace(R.id.frame_container, HomeFragment()).commit()
+        }
 }
