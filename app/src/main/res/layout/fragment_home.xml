@@ -23,7 +23,7 @@
                 android:id="@+id/img"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/icon"
+                style="@style/icon"
 
                 />
 
@@ -34,10 +34,9 @@
                 android:layout_height="wrap_content"
                 android:text="البحث باللفظ ف القران"
                 android:layout_marginStart="@dimen/_10sdp"
-
                 android:drawableEnd="@drawable/baseline_search_24"
                 android:hint="Search here......"
-
+                style="@style/Button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img" />
 
@@ -50,10 +49,8 @@
                 android:drawableEnd="@drawable/baseline_search_24"
                 android:text="البحث بالمعنى فى القران"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lexical_btn" />
-
-
-
+                app:layout_constraintTop_toBottomOf="@id/lexical_btn"
+                style="@style/Button"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

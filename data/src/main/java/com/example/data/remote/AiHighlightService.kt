@@ -10,7 +10,6 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface AiHighlightService {
-
     @POST("question")
     @FormUrlEncoded
     suspend fun askQuestion(

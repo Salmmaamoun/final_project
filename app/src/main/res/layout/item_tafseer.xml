@@ -27,12 +27,10 @@
                 android:id="@+id/search_sora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/primrycolor"
-                android:textColor="@color/black"
+                style="@style/TextViewPrimary"
                 android:textSize="@dimen/_16sdp"
                 android:padding="@dimen/_6sdp"
                 android:textStyle="bold"
-
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

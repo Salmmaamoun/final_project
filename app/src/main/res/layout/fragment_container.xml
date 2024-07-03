@@ -15,11 +15,10 @@
             android:id="@+id/fragQuranContainer_tablayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
-            android:layout_margin="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tabGravity="fill" />
+            />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/quranHome"

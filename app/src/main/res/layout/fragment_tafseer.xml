@@ -28,21 +28,22 @@
             android:id="@+id/icon"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/icon"
+            style="@style/icon"
             />
 
         <Button
             android:id="@+id/name_sura"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_7sdp"
             android:layout_marginTop="@dimen/_110sdp"
             android:hint="ادخل اسم السورة.."
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:textColorHint="@color/black"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Button"
+            />
         <TextView
             android:id="@+id/surah_name_ed"
             android:layout_width="wrap_content"
@@ -79,7 +80,9 @@
             android:drawableEnd="@drawable/baseline_search_24"
             android:text="@string/search_ar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/number_aya" />
+            app:layout_constraintTop_toBottomOf="@id/number_aya"
+            style="@style/Button"
+            />
         <Button
             android:id="@+id/search_button_en"
             android:layout_width="match_parent"
@@ -90,7 +93,9 @@
             android:text="@string/search_en"
             app:layout_constraintStart_toEndOf="@id/search_button_ar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_button_ar" />
+            app:layout_constraintTop_toBottomOf="@id/search_button_ar"
+            style="@style/Button"
+            />
 
 
 
@@ -99,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
+            android:padding="@dimen/_8sdp"
             android:textColor="@color/black"
             android:textSize="@dimen/_13sdp"
             android:textStyle="bold"
@@ -121,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
+                android:padding="@dimen/_8sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 android:hint="التفسير:"

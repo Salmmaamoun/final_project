@@ -29,16 +29,16 @@
                 android:id="@+id/surahId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/TextViewPrimary"
                 android:text="@{ name.nameAr}"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/primrycolor"
-                android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 android:padding="@dimen/_6sdp"
                 android:textStyle="bold"
                 app:layout_constraintRight_toRightOf="parent"
                 android:gravity="start"
-                tools:text="Surah: 1" />
+                tools:text="Surah: 1"
+                />
 
             <TextView
                 android:id="@+id/aya"

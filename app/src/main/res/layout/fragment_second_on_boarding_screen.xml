@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="@id/imgOnboard"
             app:layout_constraintLeft_toLeftOf="@id/imgOnboard"
-            android:text="توكل على الله و تدبر القران"
+            android:text="كِتَابٌ أَنْزَلْنَاهُ إِلَيْكَ مُبَارَكٌ لِيَدَّبَّرُوا آيَاتِهِ وَلِيَتَذَكَّرَ أُولُو الْأَلْبَابِ"
             android:gravity="center"
             android:textSize="24sp"
             android:textStyle="bold"

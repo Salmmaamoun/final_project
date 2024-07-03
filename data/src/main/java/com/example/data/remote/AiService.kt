@@ -17,9 +17,3 @@ interface AiService {
         @Path("query") query: String
     ): Response<ResponseBody>
 }
-/*
- @GET("similar-verse/{query}")
-    suspend fun getSemanticSearch(
-        @Path("query") query: String
-    ):SemanticAiResponce
- */

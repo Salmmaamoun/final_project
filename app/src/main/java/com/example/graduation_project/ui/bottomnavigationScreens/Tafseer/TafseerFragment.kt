@@ -71,7 +71,7 @@ class TafseerFragment : BaseFragment<FragmentTafseerBinding>() {
             }
         } else {
             // Handle the case when arguments are null
-            binding.surahNameEd.text = "اسم السورة ليس موجود..."
+            binding.surahNameEd.text = "اسم السورة..."
         }
 
         binding.searchButtonAr.setOnClickListener {
